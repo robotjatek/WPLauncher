@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:wplauncher="clr-namespace:WPLauncher"
+             x:Class="WPLauncher.TilePage2">
+    <ScrollView>
+        <StackLayout x:Name="MainLayout" Padding="3" >
+            <wplauncher:SquareTile BackgroundColor="red"/>
+            <wplauncher:SquareTile BackgroundColor="green"/>
+
+            <wplauncher:WideTile BackgroundColor="Coral"/>
+
+            <wplauncher:SquareTile BackgroundColor="blue"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
