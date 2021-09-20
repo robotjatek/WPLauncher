@@ -37,7 +37,7 @@ Widgets with live data
 ### M1
 
 - [ ] Static Grid
-- [ ] 4 columns
+- [x] 4 columns
 - [ ] Show *something* on the tiles (text/image/icon/etc)
 - [ ] Pin installed apps to the screen
 - [ ] Unpin installed apps from the main screen
@@ -82,6 +82,11 @@ Work is underway on M1
 
 
 ## Development log
+
+### 2021/09/20
+
+- All tile sizes are accouted for
+- Works with all of the possible arrangements
 
 ### 2021/09/19
 
