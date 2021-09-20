@@ -7,25 +7,39 @@
             <Grid x:Name="MainGrid" Padding="3">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50*" />
-                    <ColumnDefinition Width="50*" />
+                    <ColumnDefinition Width="25*" />
+                    <ColumnDefinition Width="25*" />
+                    <ColumnDefinition Width="25*" />
+                    <ColumnDefinition Width="25*" />
                 </Grid.ColumnDefinitions>
 
-                <wplauncher:SquareTile BackgroundColor="Green" Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                <wplauncher:SquareTile BackgroundColor="Red" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                <wplauncher:SquareTile BackgroundColor="Green" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                <wplauncher:SquareTile BackgroundColor="Red" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
 
-                <wplauncher:SquareTile BackgroundColor="Red" Grid.Row="1" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                <wplauncher:SquareTile BackgroundColor="Green" Grid.Row="1" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                <wplauncher:SquareTile BackgroundColor="Red" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                <wplauncher:SquareTile BackgroundColor="Green" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
 
-                <wplauncher:SquareTile BackgroundColor="Red" Grid.Row="2" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                <wplauncher:SquareTile BackgroundColor="Green" Grid.Row="2" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                <wplauncher:SquareTile BackgroundColor="Red" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                <wplauncher:SquareTile BackgroundColor="Green" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
 
-                <wplauncher:SquareTile BackgroundColor="Red" Grid.Row="3" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                <wplauncher:SquareTile BackgroundColor="Green" Grid.Row="3" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                <wplauncher:SquareTile BackgroundColor="Red" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                <wplauncher:SquareTile BackgroundColor="Green" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
 
-                <wplauncher:WideTile BackgroundColor="Coral" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                <wplauncher:SquareTile BackgroundColor="Blue" Grid.Row="8" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                <wplauncher:SquareTile BackgroundColor="Blue" Grid.Row="8" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                <wplauncher:SquareTile BackgroundColor="Blue" Grid.Row="8" Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                <wplauncher:SquareTile BackgroundColor="Blue" Grid.Row="8" Grid.Column="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
 
-                <wplauncher:SquareTile BackgroundColor="Blue" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                <wplauncher:SquareTile BackgroundColor="YellowGreen" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="4" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+
+                <wplauncher:WideTile BackgroundColor="Coral" Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                
+                <wplauncher:SquareTile BackgroundColor="#1BA1E2" Grid.Row="15" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+
+                <wplauncher:SquareTile BackgroundColor="Blue" Grid.Row="15" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                <wplauncher:SquareTile BackgroundColor="Blue" Grid.Row="16" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                <wplauncher:SquareTile BackgroundColor="Blue" Grid.Row="15" Grid.Column="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                <wplauncher:SquareTile BackgroundColor="Blue" Grid.Row="16" Grid.Column="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
 
             </Grid>
         </ScrollView>
