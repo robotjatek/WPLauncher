@@ -29,6 +29,7 @@ Widgets with live data
 - Tasks
 - Calendar
 - Email
+- Hungarian name days
 
 *Information gather via public API-s. When public API-s are not available extract information from system notifications if its possible* 
 
@@ -42,6 +43,7 @@ Widgets with live data
 - [ ] Pin installed apps to the screen
 - [ ] Unpin installed apps from the main screen
 - [ ] Launch pinned apps
+- [ ] Data structure to store tiles on the main screen
 
 ### M2
 
