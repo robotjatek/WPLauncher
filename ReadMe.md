@@ -39,7 +39,8 @@ Widgets with live data
 
 - [ ] Static Grid
 - [x] 4 columns
-- [ ] Show *something* on the tiles (text/image/icon/etc)
+- [x] Show *something* on the tiles (text/image/icon/etc.)
+- [ ] Handle click event on tiles
 - [ ] Pin installed apps to the screen
 - [ ] Unpin installed apps from the main screen
 - [ ] Launch pinned apps
@@ -84,6 +85,10 @@ Work is underway on M1
 
 
 ## Development log
+
+### 2021/09/28
+
+- Tiles are no longer empty squares
 
 ### 2021/09/20
 

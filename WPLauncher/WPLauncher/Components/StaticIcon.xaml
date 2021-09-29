@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WPLauncher.Components.StaticIcon">
+    <ContentView.Content>
+        <Grid Padding="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <FlexLayout Grid.Row="0" Padding="10" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" AlignContent="Center" JustifyContent="Center" >
+                <Image Aspect="AspectFit" Source="robot.png"/>
+            </FlexLayout>
+
+            <StackLayout Grid.Row="1" VerticalOptions="End" HorizontalOptions="StartAndExpand">
+                <Label Text="Faszom" TextColor="White" FontSize="14"/>
+            </StackLayout>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

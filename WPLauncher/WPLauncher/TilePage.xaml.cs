@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 
+using WPLauncher.Components;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -72,8 +74,13 @@ namespace WPLauncher
             var tile = new WideTile
             {
                 BackgroundColor = color,
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                VerticalOptions = LayoutOptions.FillAndExpand
+                HorizontalOptions = LayoutOptions.Fill,
+                VerticalOptions = LayoutOptions.Fill,
+                Content = new StaticIcon
+                {
+                    VerticalOptions = LayoutOptions.Center,
+                    HorizontalOptions = LayoutOptions.Center
+                }
             };
 
             SetGridMode(row, column, size, tile);
@@ -86,8 +93,13 @@ namespace WPLauncher
             var tile = new SquareTile
             {
                 BackgroundColor = color,
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                VerticalOptions = LayoutOptions.FillAndExpand,
+                HorizontalOptions = LayoutOptions.Fill,
+                VerticalOptions = LayoutOptions.Fill,
+                Content = new StaticIcon
+                {
+                    VerticalOptions = LayoutOptions.Center,
+                    HorizontalOptions = LayoutOptions.Center
+                }
             };
 
             SetGridMode(row, column, size, tile);
