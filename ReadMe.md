@@ -86,6 +86,10 @@ Work is underway on M1
 
 ## Development log
 
+### 2021/09/09
+
+- Fixed image and text positioning on tiles
+
 ### 2021/09/28
 
 - Tiles are no longer empty squares
