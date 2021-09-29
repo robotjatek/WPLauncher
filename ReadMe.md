@@ -86,9 +86,10 @@ Work is underway on M1
 
 ## Development log
 
-### 2021/09/09
+### 2021/09/29
 
 - Fixed image and text positioning on tiles
+- Fixed application permissions
 
 ### 2021/09/28
 

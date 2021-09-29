@@ -3,7 +3,6 @@ using System.IO;
 using System.Threading.Tasks;
 
 using Android.Content;
-using Android.Content.PM;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 
@@ -20,7 +19,7 @@ namespace WPLauncher.Droid
 
             var mainIntent = new Intent(Intent.ActionMain, null);
             mainIntent.AddCategory(Intent.CategoryLauncher);
-            var apps = packageManager.QueryIntentActivities(mainIntent, PackageInfoFlags.MatchAll);
+            var apps = packageManager.QueryIntentActivities(mainIntent, 0);
 
             foreach (var app in apps)
             {
