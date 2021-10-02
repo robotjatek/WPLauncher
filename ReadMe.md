@@ -86,6 +86,10 @@ Work is underway on M1
 
 ## Development log
 
+### 2021/10/02
+
+- Handle longpress event on application list
+
 ### 2021/09/29
 
 - Fixed image and text positioning on tiles
@@ -97,7 +101,7 @@ Work is underway on M1
 
 ### 2021/09/20
 
-- All tile sizes are accouted for
+- All tile sizes are accounted for
 - Works with all of the possible arrangements
 
 ### 2021/09/19
