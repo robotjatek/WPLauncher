@@ -10,8 +10,8 @@ namespace WPLauncher
         public TabbedView(AppListPage mainPage, TilePage tilePage, TilePage2 tilePage2)
         {
             InitializeComponent();
-            this.Children.Add(mainPage);
             this.Children.Add(tilePage);
+            this.Children.Add(mainPage);
             this.Children.Add(tilePage2);
         }
     }
