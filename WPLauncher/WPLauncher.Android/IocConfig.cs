@@ -1,6 +1,8 @@
 ﻿
 using Autofac;
 
+using WPLauncher.ViewModels;
+
 namespace WPLauncher.Droid
 {
     public class IocConfig
@@ -11,6 +13,7 @@ namespace WPLauncher.Droid
         {
             var builder = new ContainerBuilder();
             builder.Register(c => new ApplicationService()).As<IApplicationService>().SingleInstance();
+            builder.RegisterType<AppListViewModel>().SingleInstance();
             builder.RegisterType<App>().AsSelf().SingleInstance();
 
             Container = builder.Build();

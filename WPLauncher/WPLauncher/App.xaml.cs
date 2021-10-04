@@ -1,14 +1,16 @@
 ﻿
+using WPLauncher.ViewModels;
+
 using Xamarin.Forms;
 
 namespace WPLauncher
 {
     public partial class App : Application
     {
-        public App(IApplicationService appService)
+        public App(AppListViewModel appListViewModel)
         {
             InitializeComponent();
-            var applistPage = new AppListPage(appService)
+            var applistPage = new AppListPage(appListViewModel)
             {
                 Title = "App list"
             };
@@ -21,7 +23,6 @@ namespace WPLauncher
                 Title = "StackLayout"
             };
             MainPage = new TabbedView(applistPage, tilePage, tilePage2);
-            //MainPage = new MainPage(appService);
         }
 
         protected override void OnStart()

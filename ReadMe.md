@@ -12,6 +12,7 @@
 
 ## Tech stack
 - Xamarin Forms
+- Xamarin Community Toolkit
 - C#
 - Autofac
 - API Level 28
@@ -44,6 +45,7 @@ Widgets with live data
 - [ ] Pin installed apps to the screen
 - [ ] Unpin installed apps from the main screen
 - [ ] Launch pinned apps
+- [ ] Uninstall app
 - [ ] Data structure to store tiles on the main screen
 
 ### M2
@@ -85,6 +87,10 @@ Work is underway on M1
 
 
 ## Development log
+
+### 2021/10/04
+
+- Moved application list functionality from code-behind to ViewModel
 
 ### 2021/10/02
 
