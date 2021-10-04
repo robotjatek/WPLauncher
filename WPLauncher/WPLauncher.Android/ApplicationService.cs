@@ -21,7 +21,7 @@ namespace WPLauncher.Droid
             mainIntent.AddCategory(Intent.CategoryLauncher);
             var apps = packageManager.QueryIntentActivities(mainIntent, 0);
 
-            foreach (var app in apps)
+            Parallel.ForEach(apps, async (app) =>
             {
                 var name = app.LoadLabel(packageManager);
                 var icon = app.LoadIcon(packageManager);
@@ -29,8 +29,7 @@ namespace WPLauncher.Droid
 
                 var properties = new AppProperties(name, await ToImageSource(icon), new AndroidRunnable(intent));
                 appProperties.Add(properties);
-
-            }
+            });
 
             return appProperties;
         }
