@@ -88,6 +88,10 @@ Work is underway on M1
 
 ## Development log
 
+###  2021/10/09
+
+- Reimplemented grid using the MVVM pattern with datatemplates.
+
 ### 2021/10/04
 
 - Moved application list functionality from code-behind to ViewModel

@@ -1,10 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:wplauncher="clr-namespace:WPLauncher"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:wplauncher="clr-namespace:WPLauncher"
+             xmlns:viewModels="clr-namespace:WPLauncher.ViewModels"
+             xmlns:components="clr-namespace:WPLauncher.Components" xmlns:models="clr-namespace:WPLauncher.Models"
              x:Class="WPLauncher.TilePage">
+    
+    <ContentPage.BindingContext>
+        <viewModels:TilePageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="squareTileTemplate" x:DataType="models:TileModel">
+                <wplauncher:SquareTile BackgroundColor="{Binding Color}" Grid.Row="{Binding Position.Row}" Grid.Column="{Binding Position.Column}" Grid.RowSpan="{Binding Size.Height}" Grid.ColumnSpan="{Binding Size.Width}" VerticalOptions="Fill" HorizontalOptions="Fill">
+                    <components:StaticIcon Title="{Binding Title}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                </wplauncher:SquareTile>
+            </DataTemplate>
+
+            <DataTemplate x:Key="wideTileTemplate" x:DataType="models:TileModel">
+                <wplauncher:WideTile BackgroundColor="{Binding Color}" Grid.Row="{Binding Position.Row}" Grid.Column="{Binding Position.Column}" Grid.RowSpan="{Binding Size.Height}" Grid.ColumnSpan="{Binding Size.Width}" VerticalOptions="Fill" HorizontalOptions="Fill">
+                    <components:StaticIcon Title="{Binding Title}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                </wplauncher:WideTile>
+            </DataTemplate>
+
+            <wplauncher:TileViewSelector x:Key="tileViewSelector" SquareTileTemplate="{StaticResource squareTileTemplate}" WideTileTemplate="{StaticResource wideTileTemplate}"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
         <ScrollView x:Name="Scroller">
-            <Grid x:Name="MainGrid" Padding="3">
+            <Grid x:Name="MainGrid" Padding="3" BindableLayout.ItemsSource="{Binding TileModels}" BindableLayout.ItemTemplateSelector="{StaticResource tileViewSelector}">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="25*" />
@@ -12,35 +38,6 @@
                     <ColumnDefinition Width="25*" />
                     <ColumnDefinition Width="25*" />
                 </Grid.ColumnDefinitions>
-
-                <!--<wplauncher:SquareTile BackgroundColor="Green" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                <wplauncher:SquareTile BackgroundColor="Red" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-
-                <wplauncher:SquareTile BackgroundColor="Red" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                <wplauncher:SquareTile BackgroundColor="Green" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-
-                <wplauncher:SquareTile BackgroundColor="Red" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                <wplauncher:SquareTile BackgroundColor="Green" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-
-                <wplauncher:SquareTile BackgroundColor="Red" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                <wplauncher:SquareTile BackgroundColor="Green" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-
-                <wplauncher:SquareTile BackgroundColor="Blue" Grid.Row="8" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                <wplauncher:SquareTile BackgroundColor="Blue" Grid.Row="8" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                <wplauncher:SquareTile BackgroundColor="Blue" Grid.Row="8" Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                <wplauncher:SquareTile BackgroundColor="Blue" Grid.Row="8" Grid.Column="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-
-                <wplauncher:SquareTile BackgroundColor="YellowGreen" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="4" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
-
-                <wplauncher:WideTile BackgroundColor="Coral" Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="4" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                
-                <wplauncher:SquareTile BackgroundColor="#1BA1E2" Grid.Row="15" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
-
-                <wplauncher:SquareTile BackgroundColor="Blue" Grid.Row="15" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                <wplauncher:SquareTile BackgroundColor="Blue" Grid.Row="16" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                <wplauncher:SquareTile BackgroundColor="Blue" Grid.Row="15" Grid.Column="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                <wplauncher:SquareTile BackgroundColor="Blue" Grid.Row="16" Grid.Column="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>-->
-
             </Grid>
         </ScrollView>
     </ContentPage.Content>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
+using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 
 namespace WPLauncher.ViewModels
@@ -33,17 +34,15 @@ namespace WPLauncher.ViewModels
             }
         }
 
-        public ICommand HandleItemTapped => new Command((selected) =>
-        {
-            OnItemTapped(selected as AppProperties);
-        });
+        public ICommand RunApplicationCommand => new Command<AppProperties>(OnItemTapped);
 
-        public ICommand LongPressCommand => new Command(async (arg) =>
+        public ICommand LongPressCommand => new AsyncCommand<AppProperties>(OpenContextMenu);
+
+        private async Task OpenContextMenu(AppProperties selected)
         {
-            var selected = arg as AppProperties;
             var action = await Application.Current.MainPage.DisplayActionSheet($"{selected.Name}", "Cancel", null, new[] { "Pin to start", "Uninstall", "Application info" });
             await Application.Current.MainPage.DisplayAlert("", action, "Cancel");
-        });
+        }
 
         private void OnItemTapped(AppProperties app)
         {

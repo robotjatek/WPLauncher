@@ -11,7 +11,7 @@
                     <ViewCell>
                         <StackLayout Orientation="Horizontal" BackgroundColor="Black"
                                      
-                                     xct:TouchEffect.Command="{Binding Path=BindingContext.HandleItemTapped, Source={x:Reference listViewThing}}"
+                                     xct:TouchEffect.Command="{Binding Path=BindingContext.RunApplicationCommand, Source={x:Reference listViewThing}}"
                                      xct:TouchEffect.CommandParameter="{Binding .}"
                                      
                                      xct:TouchEffect.LongPressCommand="{Binding Path=BindingContext.LongPressCommand, Source={x:Reference listViewThing}}"

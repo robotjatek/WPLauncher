@@ -4,7 +4,7 @@ namespace WPLauncher
 {
     public class TileSizeDefinitions
     {
-        public TileProperties GetTileSize(TileSizeMode size)
+        public TileSize GetTileSize(TileSizeMode size)
         {
             return tileSizes[size];
         }
@@ -17,36 +17,36 @@ namespace WPLauncher
             Wide = 3 // 4x2
         }
 
-        private readonly Dictionary<TileSizeMode, TileProperties> tileSizes = new Dictionary<TileSizeMode, TileProperties>()
+        private readonly Dictionary<TileSizeMode, TileSize> tileSizes = new Dictionary<TileSizeMode, TileSize>()
         {
             {
                 TileSizeMode.Wide,
-                new TileProperties(4,2)
+                new TileSize(4,2)
             },
 
             {
                 TileSizeMode.Small,
-                new TileProperties(1,1)
+                new TileSize(1,1)
             },
 
             {
                 TileSizeMode.Medium,
-                new TileProperties(2,2)
+                new TileSize(2,2)
             },
 
             {
                 TileSizeMode.Large,
-                new TileProperties(4,4)
+                new TileSize(4,4)
             }
         };
 
-        public class TileProperties
+        public class TileSize
         {
             public int Width { get; private set; }
 
             public int Height { get; private set; }
 
-            public TileProperties(int width, int height)
+            public TileSize(int width, int height)
             {
                 Width = width;
                 Height = height;
