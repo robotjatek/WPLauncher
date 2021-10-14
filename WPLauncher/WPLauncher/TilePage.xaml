@@ -4,7 +4,9 @@
              xmlns:wplauncher="clr-namespace:WPLauncher"
              xmlns:viewModels="clr-namespace:WPLauncher.ViewModels"
              xmlns:components="clr-namespace:WPLauncher.Components" xmlns:models="clr-namespace:WPLauncher.Models"
-             x:Class="WPLauncher.TilePage">
+             x:Class="WPLauncher.TilePage"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Name="TilePageView">
     
     <ContentPage.BindingContext>
         <viewModels:TilePageViewModel />
@@ -13,13 +15,37 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="squareTileTemplate" x:DataType="models:TileModel">
-                <wplauncher:SquareTile BackgroundColor="{Binding Color}" Grid.Row="{Binding Position.Row}" Grid.Column="{Binding Position.Column}" Grid.RowSpan="{Binding Size.Height}" Grid.ColumnSpan="{Binding Size.Width}" VerticalOptions="Fill" HorizontalOptions="Fill">
+                <wplauncher:SquareTile
+                        BackgroundColor="{Binding Color}"
+                        Grid.Row="{Binding Position.Row}"
+                        Grid.Column="{Binding Position.Column}"
+                        Grid.RowSpan="{Binding Size.Height}"
+                        Grid.ColumnSpan="{Binding Size.Width}"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Start"
+                        xct:TouchEffect.Command="{Binding BindingContext.RunApplicationCommand, Source={x:Reference TilePageView}}"
+                        xct:TouchEffect.CommandParameter="{Binding .}"
+                        xct:TouchEffect.LongPressCommand="{Binding BindingContext.OpenContextMenuCommand, Source={x:Reference TilePageView}}"
+                        xct:TouchEffect.LongPressCommandParameter="{Binding .}"
+                    >
                     <components:StaticIcon Title="{Binding Title}" VerticalOptions="Center" HorizontalOptions="Center"/>
                 </wplauncher:SquareTile>
             </DataTemplate>
 
             <DataTemplate x:Key="wideTileTemplate" x:DataType="models:TileModel">
-                <wplauncher:WideTile BackgroundColor="{Binding Color}" Grid.Row="{Binding Position.Row}" Grid.Column="{Binding Position.Column}" Grid.RowSpan="{Binding Size.Height}" Grid.ColumnSpan="{Binding Size.Width}" VerticalOptions="Fill" HorizontalOptions="Fill">
+                <wplauncher:WideTile
+                        BackgroundColor="{Binding Color}" 
+                        Grid.Row="{Binding Position.Row}" 
+                        Grid.Column="{Binding Position.Column}" 
+                        Grid.RowSpan="{Binding Size.Height}" 
+                        Grid.ColumnSpan="{Binding Size.Width}"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Start"
+                        xct:TouchEffect.Command="{Binding BindingContext.RunApplicationCommand, Source={x:Reference TilePageView}}"
+                        xct:TouchEffect.CommandParameter="{Binding .}"
+                        xct:TouchEffect.LongPressCommand="{Binding BindingContext.OpenContextMenuCommand, Source={x:Reference TilePageView}}"
+                        xct:TouchEffect.LongPressCommandParameter="{Binding .}"
+                    >
                     <components:StaticIcon Title="{Binding Title}" VerticalOptions="Center" HorizontalOptions="Center"/>
                 </wplauncher:WideTile>
             </DataTemplate>
@@ -29,14 +55,13 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <ScrollView x:Name="Scroller">
-            <Grid x:Name="MainGrid" Padding="3" BindableLayout.ItemsSource="{Binding TileModels}" BindableLayout.ItemTemplateSelector="{StaticResource tileViewSelector}">
-
+        <ScrollView>
+            <Grid Padding="3" BindableLayout.ItemsSource="{Binding TileModels}" BindableLayout.ItemTemplateSelector="{StaticResource tileViewSelector}">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="25*" />
-                    <ColumnDefinition Width="25*" />
-                    <ColumnDefinition Width="25*" />
-                    <ColumnDefinition Width="25*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
             </Grid>
         </ScrollView>

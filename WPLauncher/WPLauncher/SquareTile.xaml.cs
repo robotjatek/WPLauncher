@@ -14,7 +14,7 @@ namespace WPLauncher
 
         protected override void OnSizeAllocated(double width, double height)
         {
-            base.OnSizeAllocated(width, height);
+            base.OnSizeAllocated(width, width);
             HeightRequest = width;
         }
     }

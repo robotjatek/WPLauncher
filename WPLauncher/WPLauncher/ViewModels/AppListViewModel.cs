@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace WPLauncher.ViewModels
 {
-    public class AppListViewModel : BindableObject
+    public class AppListViewModel
     {
         private bool loaded = false; //TODO: what to do when the applist is updated?
         private readonly IApplicationService applicationService;
