@@ -1,15 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="WPLauncher.AppListPage">
+             x:Class="WPLauncher.AppListPage"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+
     <StackLayout>
-        <ListView x:Name="listViewThing">
+        <ListView x:Name="listViewThing" ItemsSource="{Binding AppList}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal" BackgroundColor="Black">
+                        <StackLayout Orientation="Horizontal" BackgroundColor="Black"
+                                     
+                                     xct:TouchEffect.Command="{Binding Path=BindingContext.RunApplicationCommand, Source={x:Reference listViewThing}}"
+                                     xct:TouchEffect.CommandParameter="{Binding .}"
+                                     
+                                     xct:TouchEffect.LongPressCommand="{Binding Path=BindingContext.LongPressCommand, Source={x:Reference listViewThing}}"
+                                     xct:TouchEffect.LongPressCommandParameter="{Binding .}">
+
                             <Image WidthRequest="32" HorizontalOptions="Fill" VerticalOptions="Fill" Source="{Binding Icon}" />
-                            <Label Text="{Binding Name}" TextColor="White" />
+                            <Label Text="{Binding Name}" TextColor="White" VerticalOptions="CenterAndExpand" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

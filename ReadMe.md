@@ -12,6 +12,7 @@
 
 ## Tech stack
 - Xamarin Forms
+- Xamarin Community Toolkit
 - C#
 - Autofac
 - API Level 28
@@ -40,11 +41,14 @@ Widgets with live data
 - [ ] Static Grid
 - [x] 4 columns
 - [x] Show *something* on the tiles (text/image/icon/etc.)
-- [ ] Handle click event on tiles
-- [ ] Pin installed apps to the screen
-- [ ] Unpin installed apps from the main screen
+- [x] Handle click event on tiles
+- [x] Pin installed apps to the screen
+- [x] Unpin installed apps from the main screen
 - [ ] Launch pinned apps
+- [ ] Uninstall app
 - [ ] Data structure to store tiles on the main screen
+- [ ] Persist tile arrangement
+- [ ] Global settings service with fixed options
 
 ### M2
 
@@ -56,6 +60,8 @@ Widgets with live data
     - [ ] Calendar
     - [ ] Mail
     - [ ] Messages
+    - [ ] Photos
+    - [ ] Contacts
 - [ ] Rearrange tiles on the grid - (quadtree?)
 - [ ] Resize tiles / Multi size app tiles
 - [ ] Feedback to the user when clicked (Rotation/animations/etc)
@@ -67,6 +73,14 @@ Widgets with live data
 - [ ] More tiles
 - [ ] Optimizations
 - [ ] Bug fixes
+- [ ] Multi lang support
+- [ ] Light mode/Dark mode support
+- [ ] First public beta version (?)
+
+### M4
+
+- [ ] Port to MAUI
+- [ ] Landscape mode support
 
 ### Current progress
 
@@ -86,6 +100,24 @@ Work is underway on M1
 
 ## Development log
 
+### 2021/10/16
+
+- Now it is possible to pin tiles to the start screen
+- Now it is possible to unpin tiles to the start screen
+- Fixed a sizing issue with the start screen
+
+###  2021/10/09
+
+- Reimplemented grid using the MVVM pattern with datatemplates.
+
+### 2021/10/04
+
+- Moved application list functionality from code-behind to ViewModel
+
+### 2021/10/02
+
+- Handle longpress event on application list
+
 ### 2021/09/29
 
 - Fixed image and text positioning on tiles
@@ -97,7 +129,7 @@ Work is underway on M1
 
 ### 2021/09/20
 
-- All tile sizes are accouted for
+- All tile sizes are accounted for
 - Works with all of the possible arrangements
 
 ### 2021/09/19

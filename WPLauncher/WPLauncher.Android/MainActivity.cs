@@ -16,6 +16,7 @@ namespace WPLauncher.Droid
             base.OnCreate(savedInstanceState);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            //global::Xamarin.Forms.Forms.SetFlags("UseLegacyRenderers"); //TODO: remove this hack when XCT can work woth fast renderers
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
             var ioc = new IocConfig().Container;

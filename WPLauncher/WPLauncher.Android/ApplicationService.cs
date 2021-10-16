@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
-
-using Android.Content;
+﻿using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
+
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+
+using WPLauncher.Services;
 
 using Xamarin.Forms;
 
@@ -15,24 +18,25 @@ namespace WPLauncher.Droid
         public async Task<IEnumerable<AppProperties>> GetApplicationList()
         {
             var packageManager = Android.App.Application.Context.PackageManager;
-            var appProperties = new List<AppProperties>();
 
             var mainIntent = new Intent(Intent.ActionMain, null);
             mainIntent.AddCategory(Intent.CategoryLauncher);
             var apps = packageManager.QueryIntentActivities(mainIntent, 0);
 
-            foreach (var app in apps)
-            {
-                var name = app.LoadLabel(packageManager);
-                var icon = app.LoadIcon(packageManager);
-                var intent = packageManager.GetLaunchIntentForPackage(app.ActivityInfo.PackageName);
+            var appProperties = apps
+                .AsParallel()
+                .WithExecutionMode(ParallelExecutionMode.ForceParallelism)
+                .Select(async (app) =>
+                {
+                    var name = app.LoadLabel(packageManager);
+                    var icon = app.LoadIcon(packageManager);
+                    var intent = packageManager.GetLaunchIntentForPackage(app.ActivityInfo.PackageName);
 
-                var properties = new AppProperties(name, await ToImageSource(icon), new AndroidRunnable(intent));
-                appProperties.Add(properties);
+                    var properties = new AppProperties(name, await ToImageSource(icon), new AndroidRunnable(intent));
+                    return properties;
+                });
 
-            }
-
-            return appProperties;
+            return await Task.WhenAll(appProperties);
         }
 
         //TODO: Optimize this. I think its also leaking memory
