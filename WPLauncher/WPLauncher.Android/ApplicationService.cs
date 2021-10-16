@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Android.Content;
+using Android.Graphics;
+using Android.Graphics.Drawables;
+
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-using Android.Content;
-using Android.Graphics;
-using Android.Graphics.Drawables;
+using WPLauncher.Services;
 
 using Xamarin.Forms;
 
