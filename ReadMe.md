@@ -47,6 +47,8 @@ Widgets with live data
 - [ ] Launch pinned apps
 - [ ] Uninstall app
 - [ ] Data structure to store tiles on the main screen
+- [ ] Persist tile arrangement
+- [ ] Global settings service with fixed options
 
 ### M2
 
@@ -58,6 +60,8 @@ Widgets with live data
     - [ ] Calendar
     - [ ] Mail
     - [ ] Messages
+    - [ ] Photos
+    - [ ] Contacts
 - [ ] Rearrange tiles on the grid - (quadtree?)
 - [ ] Resize tiles / Multi size app tiles
 - [ ] Feedback to the user when clicked (Rotation/animations/etc)
@@ -69,6 +73,14 @@ Widgets with live data
 - [ ] More tiles
 - [ ] Optimizations
 - [ ] Bug fixes
+- [ ] Multi lang support
+- [ ] Light mode/Dark mode support
+- [ ] First public beta version (?)
+
+### M4
+
+- [ ] Port to MAUI
+- [ ] Landscape mode support
 
 ### Current progress
 
