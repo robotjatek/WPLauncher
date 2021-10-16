@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
+using WPLauncher.Services;
+
 using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 
@@ -13,12 +15,14 @@ namespace WPLauncher.ViewModels
     {
         private bool loaded = false; //TODO: what to do when the applist is updated?
         private readonly IApplicationService applicationService;
+        private readonly ITileService tileService;
 
         public ObservableCollection<AppProperties> AppList { get; } = new ObservableCollection<AppProperties>();
 
-        public AppListViewModel(IApplicationService applicationService)
+        public AppListViewModel(IApplicationService applicationService, ITileService tileService)
         {
             this.applicationService = applicationService;
+            this.tileService = tileService;
         }
 
         public async Task InitCollection()
@@ -40,8 +44,18 @@ namespace WPLauncher.ViewModels
 
         private async Task OpenContextMenu(AppProperties selected)
         {
-            var action = await Application.Current.MainPage.DisplayActionSheet($"{selected.Name}", "Cancel", null, new[] { "Pin to start", "Uninstall", "Application info" });
-            await Application.Current.MainPage.DisplayAlert("", action, "Cancel");
+            var pinToStartAction = "Pin to start";
+
+            var action = await Application.Current.MainPage.DisplayActionSheet($"{selected.Name}", "Cancel", null, new[] { pinToStartAction, "Uninstall", "Application info" });
+
+            if (action == pinToStartAction)
+            {
+                this.tileService.PinTile(selected);
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("", action, "Cancel");
+            }
         }
 
         private void OnItemTapped(AppProperties app)

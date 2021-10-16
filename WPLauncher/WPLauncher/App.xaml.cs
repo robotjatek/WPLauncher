@@ -7,14 +7,14 @@ namespace WPLauncher
 {
     public partial class App : Application
     {
-        public App(AppListViewModel appListViewModel)
+        public App(AppListViewModel appListViewModel, TilePageViewModel tilePageViewModel)
         {
             InitializeComponent();
             var applistPage = new AppListPage(appListViewModel)
             {
                 Title = "App list"
             };
-            var tilePage = new TilePage()
+            var tilePage = new TilePage(tilePageViewModel)
             {
                 Title = "Grid"
             };

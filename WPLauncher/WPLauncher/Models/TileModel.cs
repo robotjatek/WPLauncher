@@ -13,6 +13,14 @@ namespace WPLauncher.Models
 
     public class TileModel
     {
+        public TileModel()
+        {
+            Color = Color.Red;
+            Title = string.Empty;
+            Size = new TileSize(0, 0);
+            Position = new Position() { Column = 0, Row = 0 };
+        }
+
         public Color Color { get; set; }
 
         public string Title { get; set; }

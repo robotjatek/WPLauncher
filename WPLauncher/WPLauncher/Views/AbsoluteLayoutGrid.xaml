@@ -2,10 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:WPLauncher.ViewModels" xmlns:models="clr-namespace:WPLauncher.Models" xmlns:wplauncher="clr-namespace:WPLauncher"
              x:Class="WPLauncher.Views.AbsoluteLayoutGrid">
-    <ContentPage.BindingContext>
-        <viewmodels:TilePageViewModel />
-    </ContentPage.BindingContext>
-
+    
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="squareTileTemplate" x:DataType="models:TileModel">

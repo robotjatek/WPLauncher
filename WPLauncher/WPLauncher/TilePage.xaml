@@ -7,10 +7,6 @@
              x:Class="WPLauncher.TilePage"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Name="TilePageView">
-    
-    <ContentPage.BindingContext>
-        <viewModels:TilePageViewModel />
-    </ContentPage.BindingContext>
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -55,8 +51,8 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <ScrollView>
-            <Grid Padding="3" BindableLayout.ItemsSource="{Binding TileModels}" BindableLayout.ItemTemplateSelector="{StaticResource tileViewSelector}">
+        <ScrollView x:Name="scroller">
+            <Grid x:Name="tileGrid" Padding="3" BindableLayout.ItemsSource="{Binding TileModels}" BindableLayout.ItemTemplateSelector="{StaticResource tileViewSelector}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
