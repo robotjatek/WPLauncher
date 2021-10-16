@@ -41,9 +41,9 @@ Widgets with live data
 - [ ] Static Grid
 - [x] 4 columns
 - [x] Show *something* on the tiles (text/image/icon/etc.)
-- [ ] Handle click event on tiles
-- [ ] Pin installed apps to the screen
-- [ ] Unpin installed apps from the main screen
+- [x] Handle click event on tiles
+- [x] Pin installed apps to the screen
+- [x] Unpin installed apps from the main screen
 - [ ] Launch pinned apps
 - [ ] Uninstall app
 - [ ] Data structure to store tiles on the main screen
@@ -87,6 +87,12 @@ Work is underway on M1
 
 
 ## Development log
+
+### 2021/10/16
+
+- Now it is possible to pin tiles to the start screen
+- Now it is possible to unpin tiles to the start screen
+- Fixed a sizing issue with the start screen
 
 ###  2021/10/09
 
