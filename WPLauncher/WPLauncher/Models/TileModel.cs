@@ -28,5 +28,7 @@ namespace WPLauncher.Models
         public TileSize Size { get; set; }
 
         public Position Position { get; set; }
+
+        public AppProperties AppProperties { get; set; }
     }
 }

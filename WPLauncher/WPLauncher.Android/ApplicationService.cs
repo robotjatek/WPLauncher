@@ -1,7 +1,10 @@
 ﻿using Android.Content;
+using Android.Content.PM;
 using Android.Graphics;
 using Android.Graphics.Drawables;
+using Android.Net;
 
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,6 +18,32 @@ namespace WPLauncher.Droid
 {
     public class ApplicationService : IApplicationService
     {
+        private readonly ConcurrentDictionary<string, AppProperties> _applicationCache = new ConcurrentDictionary<string, AppProperties>();
+
+        public bool IsInstalled(AppProperties app)
+        {
+            try
+            {
+                Android.App.Application.Context.PackageManager.GetPackageInfo(app.PackageName, PackageInfoFlags.Activities);
+                return true;
+            }
+            catch (PackageManager.NameNotFoundException)
+            {
+                return false;
+            }
+        }
+
+        public void UninstallApplication(AppProperties app)
+        {
+            var deleteIntent = new Intent(Intent.ActionDelete);
+            deleteIntent.AddFlags(ActivityFlags.NewTask);
+            deleteIntent.SetData(Uri.Parse($"package:{app.PackageName}"));
+            deleteIntent.PutExtra(Intent.ExtraReturnResult, true);
+            Android.App.Application.Context.StartActivity(deleteIntent);
+
+            _applicationCache.TryRemove(app.PackageName, out _);
+        }
+
         public async Task<IEnumerable<AppProperties>> GetApplicationList()
         {
             var packageManager = Android.App.Application.Context.PackageManager;
@@ -28,12 +57,21 @@ namespace WPLauncher.Droid
                 .WithExecutionMode(ParallelExecutionMode.ForceParallelism)
                 .Select(async (app) =>
                 {
-                    var name = app.LoadLabel(packageManager);
-                    var icon = app.LoadIcon(packageManager);
-                    var intent = packageManager.GetLaunchIntentForPackage(app.ActivityInfo.PackageName);
+                    var packageName = app.ActivityInfo.PackageName;
 
-                    var properties = new AppProperties(name, await ToImageSource(icon), new AndroidRunnable(intent));
-                    return properties;
+                    if (!_applicationCache.ContainsKey(packageName))
+                    {
+                        var name = app.LoadLabel(packageManager);
+                        var icon = app.LoadIcon(packageManager);
+                        var intent = packageManager.GetLaunchIntentForPackage(packageName);
+
+                        var properties = new AppProperties(name, packageName, await ToImageSource(icon), new AndroidRunnable(intent));
+                        _applicationCache.TryAdd(packageName, properties);
+                        return properties;
+                    }
+
+                    _applicationCache.TryGetValue(packageName, out AppProperties cachedValue);
+                    return cachedValue;
                 });
 
             return await Task.WhenAll(appProperties);

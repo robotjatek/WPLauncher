@@ -10,6 +10,7 @@ namespace WPLauncher.Services
     {
         void PinTile(AppProperties applicationProperties);
         void UnpinTile(TileModel model);
+        void UnpinTile(string packageName);
         IEnumerable<TileModel> GetTiles();
 
         event TileListChangedEventHandler TileListChanged;

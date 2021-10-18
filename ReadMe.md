@@ -38,6 +38,8 @@ Widgets with live data
 
 ### M1
 
+M1 is all about laying the groundwork. Don't expect anything fancy here. At this phase the application is barely usable.
+
 - [ ] Static Grid
 - [x] 4 columns
 - [x] Show *something* on the tiles (text/image/icon/etc.)
@@ -45,12 +47,14 @@ Widgets with live data
 - [x] Pin installed apps to the screen
 - [x] Unpin installed apps from the main screen
 - [ ] Launch pinned apps
-- [ ] Uninstall app
+- [x] Uninstall app
 - [ ] Data structure to store tiles on the main screen
 - [ ] Persist tile arrangement
 - [ ] Global settings service with fixed options
 
 ### M2
+
+M2 is the beginning to make the launcher usable in everyday usecases.
 
 - [ ] Start working on "launcher apps/widgets/live tiles"
     - [ ] Clock
@@ -65,8 +69,11 @@ Widgets with live data
 - [ ] Rearrange tiles on the grid - (quadtree?)
 - [ ] Resize tiles / Multi size app tiles
 - [ ] Feedback to the user when clicked (Rotation/animations/etc)
+- [ ] Change accent color
 
 ### M3 
+
+M3 is the preparation for a first public beta release.
 
 - [ ] Stack layout mode
 - [ ] Further development TBD
@@ -81,6 +88,9 @@ Widgets with live data
 
 - [ ] Port to MAUI
 - [ ] Landscape mode support
+- [ ] Background image with transparent tiles
+- [ ] 6 column mode setting
+- [ ] WP7/7.8 start screen setting
 
 ### Current progress
 
@@ -99,6 +109,13 @@ Work is underway on M1
 
 
 ## Development log
+
+### 2021/10/18
+
+- Uninstall applications
+- Unpin uninstalled apps from the start screen
+- Crude caching mechanism for the application list
+- Listen to application uninstall event on android
 
 ### 2021/10/16
 

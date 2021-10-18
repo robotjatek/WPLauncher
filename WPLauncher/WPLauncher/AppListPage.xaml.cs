@@ -7,7 +7,7 @@ namespace WPLauncher
 {
     public partial class AppListPage : ContentPage
     {
-        private AppListViewModel appListViewModel;
+        private readonly AppListViewModel appListViewModel;
 
         public AppListPage(AppListViewModel appListViewModel)
         {
