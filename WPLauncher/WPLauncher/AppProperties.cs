@@ -5,15 +5,17 @@ namespace WPLauncher
 {
     public class AppProperties
     {
-        public string Name { get; private set; }
+        public string ReadableName { get; private set; }
+        public string PackageName { get; private set; }
         public ImageSource Icon { get; private set; }
         public IRunnable Runnable { get; private set; }
 
-        public AppProperties(string name, ImageSource icon, IRunnable runnable)
+        public AppProperties(string name, string packageName, ImageSource icon, IRunnable runnable)
         {
-            Name = name;
+            ReadableName = name;
             Icon = icon;
             Runnable = runnable;
+            PackageName = packageName;
         }
 
         public void RunApplication()

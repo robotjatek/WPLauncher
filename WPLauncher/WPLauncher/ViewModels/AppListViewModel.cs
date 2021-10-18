@@ -13,7 +13,6 @@ namespace WPLauncher.ViewModels
 {
     public class AppListViewModel
     {
-        private bool loaded = false; //TODO: what to do when the applist is updated?
         private readonly IApplicationService applicationService;
         private readonly ITileService tileService;
 
@@ -27,14 +26,16 @@ namespace WPLauncher.ViewModels
 
         public async Task InitCollection()
         {
-            if (!loaded)
+            var applistOrdered = (await applicationService.GetApplicationList()).OrderBy(a => a.ReadableName);
+            var difference = applistOrdered.Union(AppList).Except(applistOrdered.Intersect(AppList));
+
+            if (difference.Any())
             {
-                var applistOrdered = (await applicationService.GetApplicationList()).OrderBy(a => a.Name);
+                this.AppList.Clear();
                 foreach (var app in applistOrdered)
                 {
                     this.AppList.Add(app);
                 }
-                loaded = true;
             }
         }
 
@@ -45,12 +46,17 @@ namespace WPLauncher.ViewModels
         private async Task OpenContextMenu(AppProperties selected)
         {
             var pinToStartAction = "Pin to start";
+            var uninstallAction = "Uninstall";
 
-            var action = await Application.Current.MainPage.DisplayActionSheet($"{selected.Name}", "Cancel", null, new[] { pinToStartAction, "Uninstall", "Application info" });
+            var action = await Application.Current.MainPage.DisplayActionSheet($"{selected.ReadableName}", "Cancel", null, new[] { pinToStartAction, uninstallAction, "Application info" });
 
             if (action == pinToStartAction)
             {
                 this.tileService.PinTile(selected);
+            }
+            else if (action == uninstallAction)
+            {
+                this.applicationService.UninstallApplication(selected);
             }
             else
             {

@@ -51,7 +51,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <ScrollView x:Name="scroller">
+        <ScrollView x:Name="scroller" BackgroundColor="Black">
             <Grid x:Name="tileGrid" Padding="3" BindableLayout.ItemsSource="{Binding TileModels}" BindableLayout.ItemTemplateSelector="{StaticResource tileViewSelector}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />

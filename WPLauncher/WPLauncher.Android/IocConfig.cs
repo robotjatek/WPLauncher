@@ -33,6 +33,7 @@ namespace WPLauncher.Droid
         {
             builder.Register(c => new ApplicationService()).As<IApplicationService>().SingleInstance();
             builder.RegisterType<TileService>().As<ITileService>().SingleInstance();
+            builder.RegisterType<UninstallPackageReceiver>().SingleInstance();
         }
     }
 }
