@@ -53,7 +53,7 @@ namespace WPLauncher.ViewModels
 
         private async Task RunApplication(TileModel tile)
         {
-            await Application.Current.MainPage.DisplayAlert("", $"{tile.Title} started", "Cancel");
+            tile.AppProperties.RunApplication();
         }
 
         private async Task OpenContextMenu(TileModel pressedTile)

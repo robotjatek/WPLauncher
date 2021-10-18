@@ -46,7 +46,7 @@ M1 is all about laying the groundwork. Don't expect anything fancy here. At this
 - [x] Handle click event on tiles
 - [x] Pin installed apps to the screen
 - [x] Unpin installed apps from the main screen
-- [ ] Launch pinned apps
+- [x] Launch pinned apps
 - [x] Uninstall app
 - [ ] Data structure to store tiles on the main screen
 - [ ] Persist tile arrangement
