@@ -62,10 +62,10 @@ namespace WPLauncher.Droid
                     if (!_applicationCache.ContainsKey(packageName))
                     {
                         var name = app.LoadLabel(packageManager);
-                        var icon = app.LoadIcon(packageManager);
+                        using var icon = app.LoadIcon(packageManager);
                         var intent = packageManager.GetLaunchIntentForPackage(packageName);
 
-                        var properties = new AppProperties(name, packageName, await ToImageSource(icon), new AndroidRunnable(intent));
+                        var properties = new AppProperties(name, packageName, await ToImageSource(icon, packageName), new AndroidRunnable(intent));
                         _applicationCache.TryAdd(packageName, properties);
                         return properties;
                     }
@@ -77,16 +77,19 @@ namespace WPLauncher.Droid
             return await Task.WhenAll(appProperties);
         }
 
-        //TODO: Optimize this. I think its also leaking memory
-        private async Task<ImageSource> ToImageSource(Drawable drawable)
+        private async Task<ImageSource> ToImageSource(Drawable drawable, string cacheKey)
         {
-            var ms = new MemoryStream();
-            await ToBitmap(drawable).CompressAsync(Bitmap.CompressFormat.Png, 100, ms);
-            return ImageSource.FromStream(() =>
+            var cachePath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            var filePath = System.IO.Path.Combine(cachePath, cacheKey);
+
+            if (!File.Exists(filePath))
             {
-                var ret = new MemoryStream(ms.ToArray());
-                return ret;
-            });
+                using var stream = new MemoryStream();
+                await ToBitmap(drawable).CompressAsync(Bitmap.CompressFormat.Png, 100, stream);
+                await File.WriteAllBytesAsync(filePath, stream.ToArray());
+            }
+
+            return ImageSource.FromFile(filePath);
         }
 
         private Bitmap ToBitmap(Drawable drawable)

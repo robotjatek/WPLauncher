@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:wplauncher="clr-namespace:WPLauncher"
-             xmlns:viewModels="clr-namespace:WPLauncher.ViewModels"
-             xmlns:components="clr-namespace:WPLauncher.Components" xmlns:models="clr-namespace:WPLauncher.Models"
+             xmlns:components="clr-namespace:WPLauncher.Components"
+             xmlns:models="clr-namespace:WPLauncher.Models"
              x:Class="WPLauncher.TilePage"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Name="TilePageView">
@@ -22,9 +22,9 @@
                         xct:TouchEffect.Command="{Binding BindingContext.RunApplicationCommand, Source={x:Reference TilePageView}}"
                         xct:TouchEffect.CommandParameter="{Binding .}"
                         xct:TouchEffect.LongPressCommand="{Binding BindingContext.OpenContextMenuCommand, Source={x:Reference TilePageView}}"
-                        xct:TouchEffect.LongPressCommandParameter="{Binding .}"
-                    >
-                    <components:StaticIcon Title="{Binding Title}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        xct:TouchEffect.LongPressCommandParameter="{Binding .}">
+
+                    <components:StaticIcon Title="{Binding Title}" Icon="{Binding AppProperties.Icon}" VerticalOptions="Center" HorizontalOptions="Center"/>
                 </wplauncher:SquareTile>
             </DataTemplate>
 
@@ -42,7 +42,7 @@
                         xct:TouchEffect.LongPressCommand="{Binding BindingContext.OpenContextMenuCommand, Source={x:Reference TilePageView}}"
                         xct:TouchEffect.LongPressCommandParameter="{Binding .}"
                     >
-                    <components:StaticIcon Title="{Binding Title}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <components:StaticIcon Title="{Binding Title}" Icon="{Binding AppProperties.Icon}" VerticalOptions="Center" HorizontalOptions="Center"/>
                 </wplauncher:WideTile>
             </DataTemplate>
 
@@ -52,7 +52,7 @@
 
     <ContentPage.Content>
         <ScrollView x:Name="scroller" BackgroundColor="Black">
-            <Grid x:Name="tileGrid" Padding="3" BindableLayout.ItemsSource="{Binding TileModels}" BindableLayout.ItemTemplateSelector="{StaticResource tileViewSelector}">
+            <Grid x:Name="tileGrid" Padding="3" BindableLayout.ItemsSource="{Binding TileModels}" BindableLayout.ItemTemplateSelector="{StaticResource tileViewSelector}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />

@@ -10,7 +10,7 @@
             </Grid.RowDefinitions>
 
             <FlexLayout Grid.Row="0" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" AlignContent="Center" JustifyContent="Center" >
-                <Image Aspect="AspectFit" Source="robot.png"/>
+                <Image Aspect="AspectFit" Source="{Binding Icon}" WidthRequest="110"/>
             </FlexLayout>
 
             <StackLayout Grid.Row="0" VerticalOptions="End" HorizontalOptions="StartAndExpand">

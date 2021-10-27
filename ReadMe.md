@@ -70,8 +70,9 @@ M2 is the beginning to make the launcher usable in everyday usecases.
 - [ ] Resize tiles / Multi size app tiles
 - [ ] Feedback to the user when clicked (Rotation/animations/etc)
 - [ ] Change accent color
+- [ ] Make repository public
 
-### M3 
+### M3
 
 M3 is the preparation for a first public beta release.
 
@@ -110,6 +111,12 @@ Work is underway on M1
 
 ## Development log
 
+### 2021/10/27
+
+- Show application icons on pinned tiles
+- Mitigated a Xamarin bug by writing icon files to the internal storage then reading them back from the storage by using `ImageSource.FromFile` instead of `ImageSource.FromStream()` Its also needed to call `ForceLayout()` on the scrollview and `Layout()` on the grid component
+- Updated to the latest Xamarin release
+
 ### 2021/10/18
 
 - Uninstall applications
@@ -120,7 +127,7 @@ Work is underway on M1
 ### 2021/10/16
 
 - Now it is possible to pin tiles to the start screen
-- Now it is possible to unpin tiles to the start screen
+- Now it is possible to unpin tiles from the start screen
 - Fixed a sizing issue with the start screen
 
 ###  2021/10/09
