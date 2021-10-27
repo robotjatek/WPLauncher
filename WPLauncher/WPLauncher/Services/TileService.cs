@@ -20,7 +20,11 @@ namespace WPLauncher.Services
         {
             //TODO: calculate tile positions dynamically
             var lowestPoint = _tiles.DefaultIfEmpty(new TileModel()).Max(t => t.Position.Row + t.Size.Height);
-            var tile = CreateTile(applicationProperties.ReadableName, TileSizeMode.Medium, new Position { Row = lowestPoint, Column = 0 }, Color.Gold, applicationProperties);
+            if (_tiles.Count % 2 != 0)
+            {
+                lowestPoint -= 2;
+            }
+            var tile = CreateTile(applicationProperties.ReadableName, TileSizeMode.Medium, new Position { Row = lowestPoint, Column = _tiles.Count % 2 * 2 }, Color.FromHex("1BA1E2"), applicationProperties);
 
             _tiles.Add(tile);
             TileListChanged();

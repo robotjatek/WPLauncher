@@ -9,7 +9,7 @@ namespace WPLauncher
     {
         public TabbedView(AppListPage mainPage, TilePage tilePage, TilePage2 tilePage2)
         {
-            InitializeComponent();
+            InitializeComponent(); //TODO: use carousel view instead of tabbedpage
             this.Children.Add(tilePage);
             this.Children.Add(mainPage);
             this.Children.Add(tilePage2);
