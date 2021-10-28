@@ -18,11 +18,8 @@ namespace WPLauncher
             {
                 Title = "Grid"
             };
-            var tilePage2 = new TilePage2()
-            {
-                Title = "StackLayout"
-            };
-            MainPage = new TabbedView(applistPage, tilePage, tilePage2);
+
+            MainPage = new TabbedView(applistPage, tilePage);
         }
 
         protected override void OnStart()

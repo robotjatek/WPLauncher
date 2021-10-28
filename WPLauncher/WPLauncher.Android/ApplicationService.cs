@@ -62,11 +62,11 @@ namespace WPLauncher.Droid
                     if (!_applicationCache.ContainsKey(packageName))
                     {
                         var name = app.LoadLabel(packageManager);
-                        using var icon = app.LoadIcon(packageManager);
+                        using var icon = app.LoadIcon(packageManager); //TODO: load adaptive icon
                         var intent = packageManager.GetLaunchIntentForPackage(packageName);
-
                         var properties = new AppProperties(name, packageName, await ToImageSource(icon, packageName), new AndroidRunnable(intent));
                         _applicationCache.TryAdd(packageName, properties);
+
                         return properties;
                     }
 
@@ -79,6 +79,7 @@ namespace WPLauncher.Droid
 
         private async Task<ImageSource> ToImageSource(Drawable drawable, string cacheKey)
         {
+            //TODO: invalidate cache
             var cachePath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             var filePath = System.IO.Path.Combine(cachePath, cacheKey);
 
