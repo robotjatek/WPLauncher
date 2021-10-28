@@ -22,6 +22,12 @@ namespace WPLauncher
             vm.PropertyChanged += Vm_PropertyChanged;
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            RecalculateGridDimensions();
+        }
+
         private void Vm_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(this.vm.TileModels))
