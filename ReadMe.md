@@ -111,6 +111,10 @@ Work is underway on M1
 
 ## Development log
 
+### 2021/10/30
+
+- Use carouselPage instead of tabbedPage
+
 ### 2021/10/27
 
 - Show application icons on pinned tiles
