@@ -1,6 +1,7 @@
 ﻿
 using Autofac;
 
+using WPLauncher.Pages;
 using WPLauncher.Services;
 using WPLauncher.ViewModels;
 
@@ -16,11 +17,19 @@ namespace WPLauncher.Droid
 
             RegisterServices(builder);
             RegisterViewModels(builder);
-            //TODO: register views
+            RegisterPages(builder);
 
             builder.RegisterType<App>().AsSelf().SingleInstance();
 
             Container = builder.Build();
+        }
+
+        private void RegisterPages(ContainerBuilder builder)
+        {
+            builder.RegisterType<TilePage>().SingleInstance();
+            builder.RegisterType<AppListPage>().SingleInstance();
+
+            builder.RegisterType<StartPage>().SingleInstance();
         }
 
         private static void RegisterViewModels(ContainerBuilder builder)

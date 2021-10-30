@@ -1,5 +1,5 @@
 ﻿
-using WPLauncher.ViewModels;
+using WPLauncher.Pages;
 
 using Xamarin.Forms;
 
@@ -7,19 +7,10 @@ namespace WPLauncher
 {
     public partial class App : Application
     {
-        public App(AppListViewModel appListViewModel, TilePageViewModel tilePageViewModel)
+        public App(StartPage startpage)
         {
             InitializeComponent();
-            var applistPage = new AppListPage(appListViewModel)
-            {
-                Title = "App list"
-            };
-            var tilePage = new TilePage(tilePageViewModel)
-            {
-                Title = "Grid"
-            };
-
-            MainPage = new TabbedView(applistPage, tilePage);
+            MainPage = startpage;
         }
 
         protected override void OnStart()
