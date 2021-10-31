@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="AppListPage.xaml.cs">
+    <Compile Update="Pages\AppListPage.xaml.cs">
       <DependentUpon>AppListPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="SquareTile.xaml.cs">
@@ -38,7 +38,7 @@
     <EmbeddedResource Update="SquareTile.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="TilePage.xaml">
+    <EmbeddedResource Update="Pages\TilePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="WideTile.xaml">
