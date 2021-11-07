@@ -19,6 +19,12 @@ namespace WPLauncher.Droid
     public class ApplicationService : IApplicationService
     {
         private readonly ConcurrentDictionary<string, AppProperties> _applicationCache = new ConcurrentDictionary<string, AppProperties>();
+        private readonly ILauncherApplicationService _launcherApplicationService;
+
+        public ApplicationService(ILauncherApplicationService launcherApplicationService)
+        {
+            _launcherApplicationService = launcherApplicationService;
+        }
 
         public bool IsInstalled(AppProperties app)
         {
@@ -73,8 +79,9 @@ namespace WPLauncher.Droid
                     _applicationCache.TryGetValue(packageName, out AppProperties cachedValue);
                     return cachedValue;
                 });
-
-            return await Task.WhenAll(appProperties);
+            
+            var installedApps = await Task.WhenAll(appProperties);
+            return installedApps.Concat(await _launcherApplicationService.GetLauncherApplications());
         }
 
         private async Task<ImageSource> ToImageSource(Drawable drawable, string cacheKey)

@@ -13,8 +13,14 @@ namespace WPLauncher.Services
     {
         private readonly List<TileModel> _tiles = new List<TileModel>();
         private readonly TileSizeDefinitions tileSizeDefinitions = new TileSizeDefinitions();
+        private readonly ISettingsService _settingsService;
 
         public event TileListChangedEventHandler TileListChanged;
+
+        public TileService(ISettingsService settingsService)
+        {
+            _settingsService = settingsService;
+        }
 
         public void PinTile(AppProperties applicationProperties)
         {
@@ -24,7 +30,7 @@ namespace WPLauncher.Services
             {
                 lowestPoint -= 2;
             }
-            var tile = CreateTile(applicationProperties.ReadableName, TileSizeMode.Medium, new Position { Row = lowestPoint, Column = _tiles.Count % 2 * 2 }, Color.FromHex("1BA1E2"), applicationProperties);
+            var tile = CreateTile(applicationProperties.ReadableName, TileSizeMode.Medium, new Position { Row = lowestPoint, Column = _tiles.Count % 2 * 2 }, _settingsService.AccentColor, applicationProperties);
 
             _tiles.Add(tile);
             TileListChanged();

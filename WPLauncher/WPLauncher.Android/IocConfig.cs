@@ -30,6 +30,8 @@ namespace WPLauncher.Droid
             builder.RegisterType<AppListPage>().SingleInstance();
 
             builder.RegisterType<StartPage>().SingleInstance();
+
+            builder.RegisterType<SettingsPage>().SingleInstance();
         }
 
         private static void RegisterViewModels(ContainerBuilder builder)
@@ -40,9 +42,11 @@ namespace WPLauncher.Droid
 
         private static void RegisterServices(ContainerBuilder builder)
         {
-            builder.Register(c => new ApplicationService()).As<IApplicationService>().SingleInstance();
+            builder.RegisterType<ApplicationService>().As<IApplicationService>().SingleInstance();
             builder.RegisterType<TileService>().As<ITileService>().SingleInstance();
             builder.RegisterType<UninstallPackageReceiver>().SingleInstance();
+            builder.RegisterType<SettingsService>().As<ISettingsService>().SingleInstance();
+            builder.RegisterType<LauncherApplicationService>().As<ILauncherApplicationService>().SingleInstance();
         }
     }
 }

@@ -7,6 +7,7 @@ namespace WPLauncher.Pages
     {
         public StartPage(TilePage tilePage, AppListPage applistPage)
         {
+            NavigationPage.SetHasNavigationBar(this, false);
             this.Children.Add(tilePage);
             this.Children.Add(applistPage);
         }
