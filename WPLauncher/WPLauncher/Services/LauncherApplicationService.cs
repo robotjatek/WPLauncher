@@ -18,7 +18,7 @@ namespace WPLauncher.Services
 
         public async Task<IEnumerable<AppProperties>> GetLauncherApplications()
         {
-            var app = new AppProperties("Launcher Settings", "launcher:settings", ImageSource.FromFile("robot"), new LauncherRunnable(_settingsPage));
+            var app = new AppProperties("Launcher Settings", "launcher:settings", ImageSource.FromFile("settings"), new LauncherRunnable(_settingsPage));
             return new[] { app };
         }
     }
