@@ -24,7 +24,7 @@ namespace WPLauncher.Services
             {
                 lowestPoint -= 2;
             }
-            var tile = CreateTile(applicationProperties.ReadableName, TileSizeMode.Medium, new Position { Row = lowestPoint, Column = _tiles.Count % 2 * 2 }, Color.FromHex("1BA1E2"), applicationProperties);
+            var tile = CreateTile(applicationProperties.ReadableName, TileSizeMode.Medium, new Position { Row = lowestPoint, Column = _tiles.Count % 2 * 2 }, applicationProperties);
 
             _tiles.Add(tile);
             TileListChanged();
@@ -50,7 +50,7 @@ namespace WPLauncher.Services
             return _tiles;
         }
 
-        private TileModel CreateTile(string title, TileSizeMode sizeMode, Position position, Color color, AppProperties app)
+        private TileModel CreateTile(string title, TileSizeMode sizeMode, Position position, AppProperties app)
         {
             var size = this.tileSizeDefinitions.GetTileSize(sizeMode);
             return new TileModel
@@ -58,7 +58,6 @@ namespace WPLauncher.Services
                 Title = title,
                 Size = size,
                 Position = position,
-                Color = color,
                 AppProperties = app,
             };
         }

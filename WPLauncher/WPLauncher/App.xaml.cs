@@ -10,7 +10,7 @@ namespace WPLauncher
         public App(StartPage startpage)
         {
             InitializeComponent();
-            MainPage = startpage;
+            MainPage = new NavigationPage(startpage);
         }
 
         protected override void OnStart()

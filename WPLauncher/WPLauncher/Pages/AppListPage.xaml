@@ -5,7 +5,7 @@
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
 
     <StackLayout>
-        <ListView x:Name="listViewThing" ItemsSource="{Binding AppList}" BackgroundColor="Black">
+        <ListView x:Name="listViewThing" ItemsSource="{Binding AppList}" BackgroundColor="Black" SeparatorVisibility="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
