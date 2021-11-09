@@ -6,19 +6,20 @@ using Xamarin.Forms.Xaml;
 namespace WPLauncher.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SettingsPage : ContentPage
+    public partial class AccentColorListPage : ContentPage
     {
         private readonly SettingsPageViewModel _vm;
-        public SettingsPage(SettingsPageViewModel vm)
+
+        public AccentColorListPage(SettingsPageViewModel vm)
         {
             InitializeComponent();
             _vm = vm;
-            BindingContext = _vm;
+            this.BindingContext = vm;
         }
 
-        protected override void OnAppearing()
+        private async void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            _vm.InitPage();
+            await _vm.PopView();
         }
     }
 }

@@ -32,12 +32,14 @@ namespace WPLauncher.Droid
             builder.RegisterType<StartPage>().SingleInstance();
 
             builder.RegisterType<SettingsPage>().SingleInstance();
+            builder.RegisterType<AccentColorListPage>().SingleInstance();
         }
 
         private static void RegisterViewModels(ContainerBuilder builder)
         {
             builder.RegisterType<AppListViewModel>().SingleInstance();
             builder.RegisterType<TilePageViewModel>().SingleInstance();
+            builder.RegisterType<SettingsPageViewModel>().PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies).SingleInstance();
         }
 
         private static void RegisterServices(ContainerBuilder builder)

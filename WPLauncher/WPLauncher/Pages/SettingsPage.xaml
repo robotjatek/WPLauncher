@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Class="WPLauncher.Pages.SettingsPage"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
@@ -8,11 +9,20 @@
             <Label TextColor="White" FontSize="18">LAUNCHER SETTINGS</Label>
             <Label TextColor="White" FontSize="60">theme</Label>
 
-            <Label Text="Accent color" />
-            <Frame BackgroundColor="Black" BorderColor="White" Padding="5" CornerRadius="0">
+            <Label TextColor="LightGray" Text="Background color" />
+            <Frame BackgroundColor="Black" BorderColor="White" Padding="10,5,10,5" CornerRadius="0" xct:TouchEffect.NativeAnimation="True">
                 <StackLayout Orientation="Horizontal">
-                    <BoxView BackgroundColor="Blue" VerticalOptions="Center" WidthRequest="20" HeightRequest="20"/>
-                    <Label Text="Cobalt" TextColor="White" FontSize="20" VerticalOptions="Center"/>
+                    <Label Text="dark" TextColor="White" FontSize="20" VerticalOptions="Center"/>
+                </StackLayout>
+            </Frame>
+
+            <Label TextColor="LightGray" Text="Accent color" />
+            <Frame BackgroundColor="Black" BorderColor="White" Padding="10,5,10,5" CornerRadius="0"
+                   xct:TouchEffect.NativeAnimation="True"
+                   xct:TouchEffect.Command="{Binding AccentColorSelectionTapped}">
+                <StackLayout Orientation="Horizontal">
+                    <BoxView BackgroundColor="{Binding SelectedColor.Color}" VerticalOptions="Center" WidthRequest="20" HeightRequest="20"/>
+                    <Label Text="{Binding SelectedColor.Name}" TextColor="White" FontSize="20" VerticalOptions="Center"/>
                 </StackLayout>
             </Frame>
 

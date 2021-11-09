@@ -15,7 +15,7 @@ namespace WPLauncher
 
         public void Run()
         {
-            Device.BeginInvokeOnMainThread(() => Application.Current.MainPage.Navigation.PushAsync(_page)); //TODO: investigate how to call with "await"
+            Device.BeginInvokeOnMainThread(async () => await Application.Current.MainPage.Navigation.PushAsync(_page)); //TODO: investigate how to call with "await"
             //await Application.Current.MainPage.Navigation.PushAsync(_page);
         }
     }
