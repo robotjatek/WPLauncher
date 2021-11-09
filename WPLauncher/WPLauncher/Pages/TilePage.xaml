@@ -12,7 +12,7 @@
         <ResourceDictionary>
             <DataTemplate x:Key="squareTileTemplate" x:DataType="models:TileModel">
                 <wplauncher:SquareTile
-                        BackgroundColor="{Binding Color}"
+                        BackgroundColor="{Binding BindingContext.TileColor, Source={x:Reference TilePageView}}"
                         Grid.Row="{Binding Position.Row}"
                         Grid.Column="{Binding Position.Column}"
                         Grid.RowSpan="{Binding Size.Height}"
@@ -30,7 +30,7 @@
 
             <DataTemplate x:Key="wideTileTemplate" x:DataType="models:TileModel">
                 <wplauncher:WideTile
-                        BackgroundColor="{Binding Color}" 
+                        BackgroundColor="{Binding BindingContext.TileColor, Source={x:Reference TilePageView}}"
                         Grid.Row="{Binding Position.Row}" 
                         Grid.Column="{Binding Position.Column}" 
                         Grid.RowSpan="{Binding Size.Height}" 

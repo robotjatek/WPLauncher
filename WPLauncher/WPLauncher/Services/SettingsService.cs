@@ -6,6 +6,18 @@ namespace WPLauncher.Services
 {
     public class SettingsService : ISettingsService
     {
-        public Color AccentColor { get; set; } = AccentColors.Cobalt;  //TODO: change already pinned tile colors when this setting changes
+        private Color _accentColor = AccentColors.Cobalt;
+
+        public Color AccentColor
+        {
+            get => _accentColor;
+            set
+            {
+                _accentColor = value;
+                SettingChanged();
+            }
+        }
+
+        public event SettingChangedEventHandler SettingChanged;
     }
 }

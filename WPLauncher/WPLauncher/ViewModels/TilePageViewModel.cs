@@ -26,24 +26,49 @@ namespace WPLauncher.ViewModels
             }
         }
 
+        private Color _tileColor;
+        public Color TileColor
+        {
+            get => _tileColor;
+
+            private set
+            {
+                _tileColor = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ICommand UnpinTileCommand { get; private set; }
 
         public ICommand OpenContextMenuCommand { get; private set; }
 
         public ICommand RunApplicationCommand { get; private set; }
 
-        private readonly ITileService tileService;
+        private readonly ITileService _tileService;
+        private readonly ISettingsService _settingsService;
 
-        public TilePageViewModel(ITileService tileService)
+        public TilePageViewModel(ITileService tileService, ISettingsService settingsService)
         {
-            this.tileService = tileService;
-            this.tileService.TileListChanged += TileService_TileListChanged;
+            _settingsService = settingsService;
+            _settingsService.SettingChanged += SettingsService_SettingChanged;
+
+            _tileService = tileService;
+            _tileService.TileListChanged += TileService_TileListChanged;
 
             UnpinTileCommand = new Command<TileModel>((toRemove) => RemoveTile(toRemove));
             OpenContextMenuCommand = new AsyncCommand<TileModel>((pressedTile) => OpenContextMenu(pressedTile));
             RunApplicationCommand = new AsyncCommand<TileModel>((pressedTile) => RunApplication(pressedTile));
 
-            TileModels = new ObservableCollection<TileModel>(this.tileService.GetTiles());
+            TileModels = new ObservableCollection<TileModel>(_tileService.GetTiles());
+            TileColor = _settingsService.AccentColor;
+        }
+
+        private void SettingsService_SettingChanged(string settingName)
+        {
+            if(settingName.Equals("AccentColor", StringComparison.InvariantCultureIgnoreCase))
+            {
+                TileColor = _settingsService.AccentColor;
+            }
         }
 
         private void TileService_TileListChanged()
@@ -67,13 +92,13 @@ namespace WPLauncher.ViewModels
 
         private void RemoveTile(TileModel toRemove)
         {
-            this.tileService.UnpinTile(toRemove);
+            this._tileService.UnpinTile(toRemove);
         }
 
         private void RefreshTiles()
         {
-            var tiles = this.tileService.GetTiles();
-            this.TileModels = new ObservableCollection<TileModel>(tiles);
+            var tiles = _tileService.GetTiles();
+            TileModels = new ObservableCollection<TileModel>(tiles);
         }
     }
 }

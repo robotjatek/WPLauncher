@@ -50,7 +50,8 @@ M1 is all about laying the groundwork. Don't expect anything fancy here. At this
 - [x] Uninstall app
 - [ ] Data structure to store tiles on the main screen
 - [ ] Persist tile arrangement
-- [ ] Global settings service with fixed options
+- [x] Global settings service with fixed options
+- [ ] Persist settings
 
 ### M2
 
@@ -69,7 +70,7 @@ M2 is the beginning to make the launcher usable in everyday usecases.
 - [ ] Rearrange tiles on the grid - (quadtree?)
 - [ ] Resize tiles / Multi size app tiles
 - [ ] Feedback to the user when clicked (Rotation/animations/etc)
-- [ ] Change accent color
+- [x] Change accent color
 - [ ] Make repository public
 
 ### M3
@@ -95,7 +96,7 @@ M3 is the preparation for a first public beta release.
 
 ### Current progress
 
-Work is underway on M1
+Work is underway on M1 and some low hanging fruits from M2.
 
 ## Tiles
 
@@ -110,6 +111,13 @@ Work is underway on M1
 
 
 ## Development log
+
+
+### 2021/11/09
+
+- Framework for "integrated launcher applications"
+- Launcher settings page
+- Change accent color from launcher settings
 
 ### 2021/10/30
 

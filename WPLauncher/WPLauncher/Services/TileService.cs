@@ -13,14 +13,8 @@ namespace WPLauncher.Services
     {
         private readonly List<TileModel> _tiles = new List<TileModel>();
         private readonly TileSizeDefinitions tileSizeDefinitions = new TileSizeDefinitions();
-        private readonly ISettingsService _settingsService;
 
         public event TileListChangedEventHandler TileListChanged;
-
-        public TileService(ISettingsService settingsService)
-        {
-            _settingsService = settingsService;
-        }
 
         public void PinTile(AppProperties applicationProperties)
         {
@@ -30,7 +24,7 @@ namespace WPLauncher.Services
             {
                 lowestPoint -= 2;
             }
-            var tile = CreateTile(applicationProperties.ReadableName, TileSizeMode.Medium, new Position { Row = lowestPoint, Column = _tiles.Count % 2 * 2 }, _settingsService.AccentColor, applicationProperties);
+            var tile = CreateTile(applicationProperties.ReadableName, TileSizeMode.Medium, new Position { Row = lowestPoint, Column = _tiles.Count % 2 * 2 }, applicationProperties);
 
             _tiles.Add(tile);
             TileListChanged();
@@ -56,7 +50,7 @@ namespace WPLauncher.Services
             return _tiles;
         }
 
-        private TileModel CreateTile(string title, TileSizeMode sizeMode, Position position, Color color, AppProperties app)
+        private TileModel CreateTile(string title, TileSizeMode sizeMode, Position position, AppProperties app)
         {
             var size = this.tileSizeDefinitions.GetTileSize(sizeMode);
             return new TileModel
@@ -64,7 +58,6 @@ namespace WPLauncher.Services
                 Title = title,
                 Size = size,
                 Position = position,
-                Color = color,
                 AppProperties = app,
             };
         }
