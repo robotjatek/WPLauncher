@@ -112,6 +112,9 @@ Work is underway on M1 and some low hanging fruits from M2.
 
 ## Development log
 
+### 2021/11/12
+
+- Invalidate icon cache
 
 ### 2021/11/09
 

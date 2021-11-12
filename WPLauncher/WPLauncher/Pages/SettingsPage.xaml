@@ -26,6 +26,18 @@
                 </StackLayout>
             </Frame>
 
+            <Label TextColor="White" Text="icons" FontSize="60"/>
+            <Label TextColor="LightGray" Text="Icon cache" />
+            <Button 
+                Text="Invalidate icon cache"
+                BackgroundColor="Black"
+                TextColor="LightGray"
+                BorderColor="White"
+                BorderWidth="1"
+                CornerRadius="0"
+                Command="{Binding ClearIconCacheCommand}"
+                xct:TouchEffect.NativeAnimation="True" />
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
