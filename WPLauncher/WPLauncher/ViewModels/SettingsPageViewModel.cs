@@ -14,9 +14,9 @@ namespace WPLauncher.ViewModels
     public class SettingsPageViewModel : BaseViewModel
     {
         public AccentColorListPage _accentColorPage { get; set; }
+        public ISettingsService _settingsService { get; set; }
 
         private NamedColor _selectedColor;
-        private readonly ISettingsService _settingsService;
 
         public NamedColor SelectedColor
         {
@@ -36,16 +36,20 @@ namespace WPLauncher.ViewModels
         }
 
         public ICommand AccentColorSelectionTapped { get; private set; }
+        public ICommand ClearIconCacheCommand { get; private set; }
 
         public ObservableCollection<NamedColor> AccentColorList { get; private set; } = new ObservableCollection<NamedColor>(NamedColor.NamedColors);
 
-        public SettingsPageViewModel(ISettingsService settingsService)
+        public SettingsPageViewModel()
         {
-            _settingsService = settingsService;
-
             AccentColorSelectionTapped = new Command(async () =>
             {
                 await OpenAccentColorListPage();
+            });
+
+            ClearIconCacheCommand = new Command(() =>
+            {
+                _settingsService.ClearIconCache();
             });
         }
 

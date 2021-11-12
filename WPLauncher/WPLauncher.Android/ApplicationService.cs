@@ -20,10 +20,16 @@ namespace WPLauncher.Droid
     {
         private readonly ConcurrentDictionary<string, AppProperties> _applicationCache = new ConcurrentDictionary<string, AppProperties>();
         private readonly ILauncherApplicationService _launcherApplicationService;
+        private readonly string _iconCachePath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "IconCache");
 
         public ApplicationService(ILauncherApplicationService launcherApplicationService)
         {
             _launcherApplicationService = launcherApplicationService;
+            
+            if(!Directory.Exists(_iconCachePath))
+            {
+                Directory.CreateDirectory(_iconCachePath);
+            }
         }
 
         public bool IsInstalled(AppProperties app)
@@ -48,6 +54,13 @@ namespace WPLauncher.Droid
             Android.App.Application.Context.StartActivity(deleteIntent);
 
             _applicationCache.TryRemove(app.PackageName, out _);
+        }
+
+        public void ClearCache()
+        {
+            _applicationCache.Clear();
+            Directory.Delete(_iconCachePath, true);
+            Directory.CreateDirectory(_iconCachePath);
         }
 
         public async Task<IEnumerable<AppProperties>> GetApplicationList()
@@ -79,25 +92,27 @@ namespace WPLauncher.Droid
                     _applicationCache.TryGetValue(packageName, out AppProperties cachedValue);
                     return cachedValue;
                 });
-            
+
             var installedApps = await Task.WhenAll(appProperties);
             return installedApps.Concat(await _launcherApplicationService.GetLauncherApplications());
         }
 
         private async Task<ImageSource> ToImageSource(Drawable drawable, string cacheKey)
         {
-            //TODO: invalidate cache
-            var cachePath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-            var filePath = System.IO.Path.Combine(cachePath, cacheKey);
+            var filePath = System.IO.Path.Combine(_iconCachePath, cacheKey);
+            await WriteToCache(drawable, filePath);
 
-            if (!File.Exists(filePath))
+            return ImageSource.FromFile(filePath);
+        }
+
+        private async Task WriteToCache(Drawable drawable, string filePath)
+        {
+            if (!File.Exists(filePath) || File.GetCreationTime(filePath) < System.DateTime.Now.AddDays(-7))
             {
                 using var stream = new MemoryStream();
                 await ToBitmap(drawable).CompressAsync(Bitmap.CompressFormat.Png, 100, stream);
                 await File.WriteAllBytesAsync(filePath, stream.ToArray());
             }
-
-            return ImageSource.FromFile(filePath);
         }
 
         private Bitmap ToBitmap(Drawable drawable)
@@ -106,15 +121,6 @@ namespace WPLauncher.Droid
             var canvas = new Canvas(bitmap);
             drawable.SetBounds(0, 0, canvas.Width, canvas.Height);
             drawable.Draw(canvas);
-
-            return bitmap;
-        }
-
-        private Bitmap EmptyBitmap()
-        {
-            var bitmap = Bitmap.CreateBitmap(32, 32, Bitmap.Config.Argb8888);
-            var canvas = new Canvas(bitmap);
-            canvas.DrawRGB(255, 255, 0);
 
             return bitmap;
         }
