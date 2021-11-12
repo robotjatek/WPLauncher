@@ -3,8 +3,6 @@ using System.Linq;
 
 using WPLauncher.Models;
 
-using Xamarin.Forms;
-
 using static WPLauncher.TileSizeDefinitions;
 
 namespace WPLauncher.Services

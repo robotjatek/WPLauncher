@@ -10,5 +10,7 @@ namespace WPLauncher.Services
         void UninstallApplication(AppProperties app);
 
         bool IsInstalled(AppProperties app);
+
+        void ClearCache();
     }
 }

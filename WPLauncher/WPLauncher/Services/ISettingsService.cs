@@ -11,5 +11,7 @@ namespace WPLauncher.Services
         Color AccentColor { get; set; }
 
         event SettingChangedEventHandler SettingChanged;
+
+        void ClearIconCache();
     }
 }

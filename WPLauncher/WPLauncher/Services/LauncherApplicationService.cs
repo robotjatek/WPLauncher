@@ -9,17 +9,17 @@ namespace WPLauncher.Services
 {
     public class LauncherApplicationService : ILauncherApplicationService
     {
-        private readonly SettingsPage _settingsPage;
+        private readonly List<AppProperties> _apps = new List<AppProperties>();
 
         public LauncherApplicationService(SettingsPage settingsPage)
         {
-            _settingsPage = settingsPage;
+            var settingsApp = new AppProperties("Launcher Settings", "launcher:settings", ImageSource.FromFile("settings"), new LauncherRunnable(settingsPage));
+            _apps.Add(settingsApp);
         }
 
         public async Task<IEnumerable<AppProperties>> GetLauncherApplications()
         {
-            var app = new AppProperties("Launcher Settings", "launcher:settings", ImageSource.FromFile("settings"), new LauncherRunnable(_settingsPage));
-            return new[] { app };
+            return _apps;
         }
     }
 }
