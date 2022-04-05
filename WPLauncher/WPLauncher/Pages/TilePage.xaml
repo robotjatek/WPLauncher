@@ -22,7 +22,9 @@
                         xct:TouchEffect.Command="{Binding BindingContext.RunApplicationCommand, Source={x:Reference TilePageView}}"
                         xct:TouchEffect.CommandParameter="{Binding .}"
                         xct:TouchEffect.LongPressCommand="{Binding BindingContext.OpenContextMenuCommand, Source={x:Reference TilePageView}}"
-                        xct:TouchEffect.LongPressCommandParameter="{Binding .}">
+                        xct:TouchEffect.LongPressCommandParameter="{Binding .}"
+                        Scale="{Binding Scale}"
+                    >
 
                     <components:StaticIcon Title="{Binding Title}" Icon="{Binding AppProperties.Icon}" VerticalOptions="Center" HorizontalOptions="Center"/>
                 </wplauncher:SquareTile>

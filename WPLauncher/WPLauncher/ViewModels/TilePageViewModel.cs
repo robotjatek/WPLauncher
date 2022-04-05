@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -13,9 +13,11 @@ namespace WPLauncher.ViewModels
 {
     public class TilePageViewModel : BaseViewModel
     {
-        private ObservableCollection<TileModel> _tileModels;
+        private BindingList<TileModel> _tileModels;
 
-        public ObservableCollection<TileModel> TileModels
+        public TileModel SelectedTile { get; private set; }
+
+        public BindingList<TileModel> TileModels
         {
             get => _tileModels;
 
@@ -46,6 +48,7 @@ namespace WPLauncher.ViewModels
 
         private readonly ITileService _tileService;
         private readonly ISettingsService _settingsService;
+        private bool _rearrageMode = false;
 
         public TilePageViewModel(ITileService tileService, ISettingsService settingsService)
         {
@@ -59,7 +62,7 @@ namespace WPLauncher.ViewModels
             OpenContextMenuCommand = new AsyncCommand<TileModel>((pressedTile) => OpenContextMenu(pressedTile));
             RunApplicationCommand = new AsyncCommand<TileModel>((pressedTile) => RunApplication(pressedTile));
 
-            TileModels = new ObservableCollection<TileModel>(_tileService.GetTiles());
+            TileModels = new BindingList<TileModel>(_tileService.GetTiles());
             TileColor = _settingsService.AccentColor;
         }
 
@@ -78,16 +81,43 @@ namespace WPLauncher.ViewModels
 
         private async Task RunApplication(TileModel tile)
         {
-            await Task.Run(() => tile.AppProperties.RunApplication());
+            if (_rearrageMode == false)
+            {
+                await Task.Run(() => tile.AppProperties?.RunApplication());
+            }
+            else
+            {
+                SelectTileToRearrange(tile);
+            }
         }
 
         private async Task OpenContextMenu(TileModel pressedTile)
         {
-            var action = await Application.Current.MainPage.DisplayActionSheet("", "Cancel", null, new[] { "Unpin" });
-            if (string.Equals(action, "unpin", StringComparison.InvariantCultureIgnoreCase))
+            if (_rearrageMode == false)
             {
-                RemoveTile(pressedTile);
+                var action = (await Application.Current.MainPage.DisplayActionSheet("", "Cancel", null, new[] { "Unpin", "Rearrange" })).ToUpperInvariant();
+                switch (action)
+                {
+                    case "UNPIN":
+                        RemoveTile(pressedTile);
+                        break;
+                    case "REARRANGE":
+                        SelectTileToRearrange(pressedTile);
+                        break;
+                }
             }
+        }
+
+        private void SelectTileToRearrange(TileModel tile)
+        {
+            if(SelectedTile != null)
+            {
+                SelectedTile.Scale = 1.0;
+            }
+
+            _rearrageMode = true;
+            SelectedTile = tile;
+            tile.Scale = 0.8;
         }
 
         private void RemoveTile(TileModel toRemove)
@@ -98,7 +128,7 @@ namespace WPLauncher.ViewModels
         private void RefreshTiles()
         {
             var tiles = _tileService.GetTiles();
-            TileModels = new ObservableCollection<TileModel>(tiles);
+            TileModels = new BindingList<TileModel>(tiles);
         }
     }
 }

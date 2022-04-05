@@ -1,4 +1,4 @@
-﻿using Xamarin.Forms;
+﻿using WPLauncher.ViewModels;
 
 using static WPLauncher.TileSizeDefinitions;
 
@@ -11,13 +11,16 @@ namespace WPLauncher.Models
         public int Row { get; set; }
     }
 
-    public class TileModel
+    public class TileModel : BaseViewModel
     {
+        private double _scale = 1;
+
         public TileModel()
         {
             Title = string.Empty;
             Size = new TileSize(0, 0);
             Position = new Position() { Column = 0, Row = 0 };
+            Scale = 1;
         }
 
         public string Title { get; set; }
@@ -27,5 +30,18 @@ namespace WPLauncher.Models
         public Position Position { get; set; }
 
         public AppProperties AppProperties { get; set; }
+
+        public double Scale
+        {
+            get
+            {
+                return _scale;
+            }
+            set
+            {
+                _scale = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

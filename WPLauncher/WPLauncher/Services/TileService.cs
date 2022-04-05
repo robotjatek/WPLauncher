@@ -14,6 +14,12 @@ namespace WPLauncher.Services
 
         public event TileListChangedEventHandler TileListChanged;
 
+        public TileService()
+        {
+            _tiles.Add(CreateTile("asd", TileSizeMode.Medium, new Position { Row = 0, Column = 2 }, null));
+            _tiles.Add(CreateTile("Second", TileSizeMode.Medium, new Position { Row = 0, Column = 0 }, null));
+        }
+
         public void PinTile(AppProperties applicationProperties)
         {
             //TODO: calculate tile positions dynamically
@@ -43,7 +49,7 @@ namespace WPLauncher.Services
             }
         }
 
-        public IEnumerable<TileModel> GetTiles()
+        public List<TileModel> GetTiles()
         {
             return _tiles;
         }
