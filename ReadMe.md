@@ -112,6 +112,12 @@ Work is underway on M1 and some low hanging fruits from M2.
 
 ## Development log
 
+### 2022/04/07
+
+- Select tile to rearrange
+- Unselect tile when tapping on it the second time
+- Unselect tile when tapping on the background
+
 ### 2021/11/12
 
 - Invalidate icon cache
