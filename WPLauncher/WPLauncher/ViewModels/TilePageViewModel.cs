@@ -46,9 +46,10 @@ namespace WPLauncher.ViewModels
 
         public ICommand RunApplicationCommand { get; private set; }
 
+        public ICommand CancelRearrangeCommand { get; private set; }
+
         private readonly ITileService _tileService;
         private readonly ISettingsService _settingsService;
-        private bool _rearrageMode = false;
 
         public TilePageViewModel(ITileService tileService, ISettingsService settingsService)
         {
@@ -61,6 +62,7 @@ namespace WPLauncher.ViewModels
             UnpinTileCommand = new Command<TileModel>((toRemove) => RemoveTile(toRemove));
             OpenContextMenuCommand = new AsyncCommand<TileModel>((pressedTile) => OpenContextMenu(pressedTile));
             RunApplicationCommand = new AsyncCommand<TileModel>((pressedTile) => RunApplication(pressedTile));
+            CancelRearrangeCommand = new Command(() => CancelRearrangeMode());
 
             TileModels = new BindingList<TileModel>(_tileService.GetTiles());
             TileColor = _settingsService.AccentColor;
@@ -68,7 +70,7 @@ namespace WPLauncher.ViewModels
 
         private void SettingsService_SettingChanged(string settingName)
         {
-            if(settingName.Equals("AccentColor", StringComparison.InvariantCultureIgnoreCase))
+            if (settingName.Equals("AccentColor", StringComparison.InvariantCultureIgnoreCase))
             {
                 TileColor = _settingsService.AccentColor;
             }
@@ -81,7 +83,7 @@ namespace WPLauncher.ViewModels
 
         private async Task RunApplication(TileModel tile)
         {
-            if (_rearrageMode == false)
+            if (SelectedTile == null)
             {
                 await Task.Run(() => tile.AppProperties?.RunApplication());
             }
@@ -93,7 +95,7 @@ namespace WPLauncher.ViewModels
 
         private async Task OpenContextMenu(TileModel pressedTile)
         {
-            if (_rearrageMode == false)
+            if (SelectedTile == null)
             {
                 var action = (await Application.Current.MainPage.DisplayActionSheet("", "Cancel", null, new[] { "Unpin", "Rearrange" })).ToUpperInvariant();
                 switch (action)
@@ -110,19 +112,30 @@ namespace WPLauncher.ViewModels
 
         private void SelectTileToRearrange(TileModel tile)
         {
-            if(SelectedTile != null)
+            if (tile == SelectedTile)
+            {
+                CancelRearrangeMode();
+            }
+            else
+            {
+                CancelRearrangeMode();
+                SelectedTile = tile;
+                tile.Scale = 0.8;
+            }
+        }
+
+        private void CancelRearrangeMode()
+        {
+            if (SelectedTile != null)
             {
                 SelectedTile.Scale = 1.0;
             }
-
-            _rearrageMode = true;
-            SelectedTile = tile;
-            tile.Scale = 0.8;
+            SelectedTile = null;
         }
 
         private void RemoveTile(TileModel toRemove)
         {
-            this._tileService.UnpinTile(toRemove);
+            _tileService.UnpinTile(toRemove);
         }
 
         private void RefreshTiles()

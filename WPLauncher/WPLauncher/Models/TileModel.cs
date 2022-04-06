@@ -13,7 +13,7 @@ namespace WPLauncher.Models
 
     public class TileModel : BaseViewModel
     {
-        private double _scale = 1;
+        private double _scale;
 
         public TileModel()
         {
@@ -33,10 +33,7 @@ namespace WPLauncher.Models
 
         public double Scale
         {
-            get
-            {
-                return _scale;
-            }
+            get => _scale;
             set
             {
                 _scale = value;

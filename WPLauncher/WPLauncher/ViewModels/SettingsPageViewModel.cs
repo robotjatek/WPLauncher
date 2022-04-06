@@ -20,10 +20,7 @@ namespace WPLauncher.ViewModels
 
         public NamedColor SelectedColor
         {
-            get
-            {
-                return _selectedColor;
-            }
+            get => _selectedColor;
             set
             {
                 _selectedColor = value;
@@ -55,7 +52,7 @@ namespace WPLauncher.ViewModels
 
         public void InitPage()
         {
-            SelectedColor = AccentColorList.Where(c => c.Color == _settingsService.AccentColor).First();
+            SelectedColor = AccentColorList.First(c => c.Color == _settingsService.AccentColor);
         }
 
         public async Task PopView()

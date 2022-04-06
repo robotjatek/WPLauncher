@@ -43,6 +43,7 @@
                         xct:TouchEffect.CommandParameter="{Binding .}"
                         xct:TouchEffect.LongPressCommand="{Binding BindingContext.OpenContextMenuCommand, Source={x:Reference TilePageView}}"
                         xct:TouchEffect.LongPressCommandParameter="{Binding .}"
+                        Scale="{Binding Scale}"
                     >
                     <components:StaticIcon Title="{Binding Title}" Icon="{Binding AppProperties.Icon}" VerticalOptions="Center" HorizontalOptions="Center"/>
                 </wplauncher:WideTile>
@@ -54,7 +55,9 @@
 
     <ContentPage.Content>
         <ScrollView x:Name="scroller" BackgroundColor="Black">
-            <Grid x:Name="tileGrid" Padding="3" BindableLayout.ItemsSource="{Binding TileModels}" BindableLayout.ItemTemplateSelector="{StaticResource tileViewSelector}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid x:Name="tileGrid" Padding="3" 
+                  xct:TouchEffect.Command="{Binding CancelRearrangeCommand}"
+                  BindableLayout.ItemsSource="{Binding TileModels}" BindableLayout.ItemTemplateSelector="{StaticResource tileViewSelector}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
