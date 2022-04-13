@@ -13,7 +13,7 @@ namespace WPLauncher.Models
 
     public class TileModel : BaseViewModel
     {
-        private double _scale;
+        private double _scale; // TODO: maybe use xct.toucheffect.pressedscale instead of the custom implementation
 
         public TileModel()
         {

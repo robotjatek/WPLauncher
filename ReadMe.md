@@ -112,6 +112,10 @@ Work is underway on M1 and some low hanging fruits from M2.
 
 ## Development log
 
+### 2022/04/14
+
+- Fixed a bug when canceling tile rearrange mode did not work after a tileview resize event
+
 ### 2022/04/07
 
 - Select tile to rearrange

@@ -32,7 +32,7 @@
 
             <DataTemplate x:Key="wideTileTemplate" x:DataType="models:TileModel">
                 <wplauncher:WideTile
-                        BackgroundColor="{Binding BindingContext.TileColor, Source={x:Reference TilePageView}}"
+                    BackgroundColor="{Binding BindingContext.TileColor, Source={x:Reference TilePageView}}"
                         Grid.Row="{Binding Position.Row}" 
                         Grid.Column="{Binding Position.Column}" 
                         Grid.RowSpan="{Binding Size.Height}" 
@@ -54,10 +54,12 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <ScrollView x:Name="scroller" BackgroundColor="Black">
-            <Grid x:Name="tileGrid" Padding="3" 
-                  xct:TouchEffect.Command="{Binding CancelRearrangeCommand}"
-                  BindableLayout.ItemsSource="{Binding TileModels}" BindableLayout.ItemTemplateSelector="{StaticResource tileViewSelector}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <ScrollView x:Name="scroller"
+                    BackgroundColor="Black"
+                    xct:TouchEffect.Command="{Binding CancelRearrangeCommand}">
+            <Grid x:Name="tileGrid" Padding="3"
+                                    xct:TouchEffect.Command="{Binding CancelRearrangeCommand}"
+                                    BindableLayout.ItemsSource="{Binding TileModels}" BindableLayout.ItemTemplateSelector="{StaticResource tileViewSelector}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
