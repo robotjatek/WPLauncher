@@ -16,8 +16,10 @@ namespace WPLauncher.Services
 
         public TileService()
         {
+            _tiles.Add(CreateTile("q", TileSizeMode.Medium, new Position { Row = 0, Column = 0 }, null));
             _tiles.Add(CreateTile("asd", TileSizeMode.Medium, new Position { Row = 0, Column = 2 }, null));
-            _tiles.Add(CreateTile("Second", TileSizeMode.Medium, new Position { Row = 0, Column = 0 }, null));
+            _tiles.Add(CreateTile("Second", TileSizeMode.Medium, new Position { Row = 2, Column = 0 }, null));
+            _tiles.Add(CreateTile("Third", TileSizeMode.Medium, new Position { Row = 4, Column = 0 }, null));
         }
 
         public void PinTile(AppProperties applicationProperties)
@@ -52,6 +54,16 @@ namespace WPLauncher.Services
         public List<TileModel> GetTiles()
         {
             return _tiles;
+        }
+
+        public void OnTileDrop(DropEventArgs args, int newColumnPosition, int newRowPosition)
+        {
+            args.TileModel.Position = new Position
+            {
+                Row = newRowPosition,
+                Column = newColumnPosition
+            };
+            // Note this mustn't call the TileListChanged event as the list itself didn't change only the stored element
         }
 
         private TileModel CreateTile(string title, TileSizeMode sizeMode, Position position, AppProperties app)

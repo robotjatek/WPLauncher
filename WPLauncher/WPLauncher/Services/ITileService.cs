@@ -12,6 +12,7 @@ namespace WPLauncher.Services
         void UnpinTile(TileModel model);
         void UnpinTile(string packageName);
         List<TileModel> GetTiles();
+        void OnTileDrop(DropEventArgs args, int newColumnPosition, int newRowPosition);
 
         event TileListChangedEventHandler TileListChanged;
     }

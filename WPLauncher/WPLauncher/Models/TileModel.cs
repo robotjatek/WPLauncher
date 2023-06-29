@@ -11,9 +11,11 @@ namespace WPLauncher.Models
         public int Row { get; set; }
     }
 
+    //TODO: OnPropertyChanged needs to be in an other baseclass and tilemodel shouldnt implement BaseViewModel
     public class TileModel : BaseViewModel
     {
         private double _scale; // TODO: maybe use xct.toucheffect.pressedscale instead of the custom implementation
+        private Position _position;
 
         public TileModel()
         {
@@ -27,7 +29,17 @@ namespace WPLauncher.Models
 
         public TileSize Size { get; set; }
 
-        public Position Position { get; set; }
+        public bool PanEnabled { get; set; } = true; // TODO: set it true only in drag mode
+
+        public Position Position 
+        {
+            get => _position;
+            set
+            {
+                _position = value;
+                OnPropertyChanged();
+            }
+        }
 
         public AppProperties AppProperties { get; set; }
 

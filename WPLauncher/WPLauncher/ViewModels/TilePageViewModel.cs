@@ -15,6 +15,8 @@ namespace WPLauncher.ViewModels
     {
         private BindingList<TileModel> _tileModels;
 
+        public TilePage TilePageRef { get; set; }
+
         public TileModel SelectedTile { get; private set; }
 
         public BindingList<TileModel> TileModels
@@ -48,6 +50,10 @@ namespace WPLauncher.ViewModels
 
         public ICommand CancelRearrangeCommand { get; private set; }
 
+        public ICommand OnDropCommand { get; private set; }
+
+        public ICommand OnDragCommand { get; private set; }
+
         private readonly ITileService _tileService;
         private readonly ISettingsService _settingsService;
 
@@ -59,10 +65,12 @@ namespace WPLauncher.ViewModels
             _tileService = tileService;
             _tileService.TileListChanged += TileService_TileListChanged;
 
-            UnpinTileCommand = new Command<TileModel>((toRemove) => RemoveTile(toRemove));
-            OpenContextMenuCommand = new AsyncCommand<TileModel>((pressedTile) => OpenContextMenu(pressedTile));
-            RunApplicationCommand = new AsyncCommand<TileModel>((pressedTile) => RunApplication(pressedTile));
-            CancelRearrangeCommand = new Command(() => CancelRearrangeMode());
+            UnpinTileCommand = new Command<TileModel>(RemoveTile);
+            OpenContextMenuCommand = new AsyncCommand<TileModel>(OpenContextMenu);
+            RunApplicationCommand = new AsyncCommand<TileModel>(RunApplication);
+            CancelRearrangeCommand = new Command(CancelRearrangeMode);
+            OnDropCommand = new Command<DropEventArgs>(OnDropTile);
+            OnDragCommand = new Command<DropEventArgs>(OnDragTile);
 
             TileModels = new BindingList<TileModel>(_tileService.GetTiles());
             TileColor = _settingsService.AccentColor;
@@ -95,19 +103,19 @@ namespace WPLauncher.ViewModels
 
         private async Task OpenContextMenu(TileModel pressedTile)
         {
-            if (SelectedTile == null)
-            {
-                var action = (await Application.Current.MainPage.DisplayActionSheet("", "Cancel", null, new[] { "Unpin", "Rearrange" })).ToUpperInvariant();
-                switch (action)
-                {
-                    case "UNPIN":
-                        RemoveTile(pressedTile);
-                        break;
-                    case "REARRANGE":
-                        SelectTileToRearrange(pressedTile);
-                        break;
-                }
-            }
+            //if (SelectedTile == null)
+            //{
+            //    var action = (await Application.Current.MainPage.DisplayActionSheet("", "Cancel", null, new[] { "Unpin", "Rearrange" })).ToUpperInvariant();
+            //    switch (action)
+            //    {
+            //        case "UNPIN":
+            //            RemoveTile(pressedTile);
+            //            break;
+            //        case "REARRANGE":
+            //            SelectTileToRearrange(pressedTile);
+            //            break;
+            //    }
+            //}
         }
 
         private void SelectTileToRearrange(TileModel tile)
@@ -136,6 +144,47 @@ namespace WPLauncher.ViewModels
         private void RemoveTile(TileModel toRemove)
         {
             _tileService.UnpinTile(toRemove);
+        }
+
+        private void OnDropTile(DropEventArgs args)
+        {
+            var (column, row) = CalculateNewPosition(args);
+            if (column >= 0 && column < 3)
+            {
+                _tileService.OnTileDrop(args, column, row);
+            }
+            TilePageRef.HideDropTarget();
+        }
+
+        private void OnDragTile(DropEventArgs args)
+        {
+            var (column, row) = CalculateNewPosition(args);
+            if (column >= 0 && column < 3)
+            {
+                TilePageRef.ShowDropTarget(column, row, args.TileModel);
+            }
+            else
+            {
+                TilePageRef.ShowDropTarget(
+                    args.TileModel.Position.Column,
+                    args.TileModel.Position.Row,
+                    args.TileModel);
+            }
+        }
+
+        private (int column, int row) CalculateNewPosition(DropEventArgs args)
+        {
+            // TODO: lefelé "túldobni" a tilet
+
+            var gridCellWidth = TilePageRef.Width / 4;
+
+            var calculatedTranslationX = args.TranslationX / gridCellWidth;
+            var calculatedTranslationY = args.TranslationY / gridCellWidth;
+
+            var calculatedColumn = (int)Math.Round(args.TileModel.Position.Column + calculatedTranslationX);
+            var calculatedRow = (int)Math.Round(args.TileModel.Position.Row + calculatedTranslationY);
+
+            return (calculatedColumn, calculatedRow);
         }
 
         private void RefreshTiles()

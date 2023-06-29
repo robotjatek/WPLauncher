@@ -7,7 +7,7 @@ namespace WPLauncher
 {
     public partial class App : Application
     {
-        public App(StartPage startpage)
+        public App(TilePage startpage)
         {
             InitializeComponent();
             MainPage = new NavigationPage(startpage);

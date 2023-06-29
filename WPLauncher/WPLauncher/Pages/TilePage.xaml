@@ -24,6 +24,9 @@
                         xct:TouchEffect.LongPressCommand="{Binding BindingContext.OpenContextMenuCommand, Source={x:Reference TilePageView}}"
                         xct:TouchEffect.LongPressCommandParameter="{Binding .}"
                         Scale="{Binding Scale}"
+                        OnDrop="{Binding BindingContext.OnDropCommand, Source={x:Reference TilePageView}}"
+                        OnDrag="{Binding BindingContext.OnDragCommand, Source={x:Reference TilePageView}}"
+                        TileModel="{Binding .}"
                     >
 
                     <components:StaticIcon Title="{Binding Title}" Icon="{Binding AppProperties.Icon}" VerticalOptions="Center" HorizontalOptions="Center"/>
@@ -54,19 +57,25 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <ScrollView x:Name="scroller"
+        <!--<ScrollView x:Name="scroller"
                     BackgroundColor="Black"
-                    xct:TouchEffect.Command="{Binding CancelRearrangeCommand}">
-            <Grid x:Name="tileGrid" Padding="3"
-                                    xct:TouchEffect.Command="{Binding CancelRearrangeCommand}"
-                                    BindableLayout.ItemsSource="{Binding TileModels}" BindableLayout.ItemTemplateSelector="{StaticResource tileViewSelector}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-            </Grid>
-        </ScrollView>
+                    xct:TouchEffect.Command="{Binding CancelRearrangeCommand}">-->
+        <Grid x:Name="tileGrid"
+              Padding="3"
+              BackgroundColor="Green"
+              xct:TouchEffect.Command="{Binding CancelRearrangeCommand}"
+              BindableLayout.ItemsSource="{Binding TileModels}"
+              BindableLayout.ItemTemplateSelector="{StaticResource tileViewSelector}"
+              HorizontalOptions="FillAndExpand"
+              VerticalOptions="FillAndExpand">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <!--</ScrollView>-->
     </ContentPage.Content>
 </ContentPage>

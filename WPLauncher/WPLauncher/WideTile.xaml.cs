@@ -18,4 +18,6 @@ namespace WPLauncher
             HeightRequest = width / 2;
         }
     }
+
+    // TODO: support drag and drop
 }

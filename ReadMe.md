@@ -1,6 +1,6 @@
 # WPLauncher
 
-## Features
+## Planned features
 
 - WP7/8 style live tiles
 - App list
@@ -111,6 +111,13 @@ Work is underway on M1 and some low hanging fruits from M2.
 
 
 ## Development log
+
+### 2023/06/30
+
+- Fixed a column size calculation bug on first run
+- Basic pan gesture recognition
+- Tiles can now be rearranged
+- Show drop target on screen
 
 ### 2022/04/14
 
