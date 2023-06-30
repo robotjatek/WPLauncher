@@ -32,7 +32,7 @@
     <Compile Update="Pages\AppListPage.xaml.cs">
       <DependentUpon>AppListPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="TileComponent.xaml.cs">
+    <Compile Update="Components\TileComponent.xaml.cs">
       <DependentUpon>TileComponent.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -44,7 +44,7 @@
     <EmbeddedResource Update="Pages\AccentColorListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="TileComponent.xaml">
+    <EmbeddedResource Update="Components\TileComponent.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\TilePage.xaml">
