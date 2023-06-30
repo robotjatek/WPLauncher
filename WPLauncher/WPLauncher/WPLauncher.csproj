@@ -32,8 +32,8 @@
     <Compile Update="Pages\AppListPage.xaml.cs">
       <DependentUpon>AppListPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="SquareTile.xaml.cs">
-      <DependentUpon>SquareTile.xaml</DependentUpon>
+    <Compile Update="TileComponent.xaml.cs">
+      <DependentUpon>TileComponent.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -44,13 +44,10 @@
     <EmbeddedResource Update="Pages\AccentColorListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="SquareTile.xaml">
+    <EmbeddedResource Update="TileComponent.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\TilePage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="WideTile.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

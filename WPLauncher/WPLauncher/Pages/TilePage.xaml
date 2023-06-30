@@ -11,7 +11,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="squareTileTemplate" x:DataType="models:TileModel">
-                <wplauncher:SquareTile
+                <wplauncher:TileComponent
                         BackgroundColor="{Binding BindingContext.TileColor, Source={x:Reference TilePageView}}"
                         Grid.Row="{Binding Position.Row}"
                         Grid.Column="{Binding Position.Column}"
@@ -26,33 +26,11 @@
                         Scale="{Binding Scale}"
                         OnDrop="{Binding BindingContext.OnDropCommand, Source={x:Reference TilePageView}}"
                         OnDrag="{Binding BindingContext.OnDragCommand, Source={x:Reference TilePageView}}"
-                        TileModel="{Binding .}"
-                    >
-
+                        TileModel="{Binding .}">
                     <components:StaticIcon Title="{Binding Title}" Icon="{Binding AppProperties.Icon}" VerticalOptions="Center" HorizontalOptions="Center"/>
-                </wplauncher:SquareTile>
+                </wplauncher:TileComponent>
             </DataTemplate>
 
-            <DataTemplate x:Key="wideTileTemplate" x:DataType="models:TileModel">
-                <wplauncher:WideTile
-                    BackgroundColor="{Binding BindingContext.TileColor, Source={x:Reference TilePageView}}"
-                        Grid.Row="{Binding Position.Row}" 
-                        Grid.Column="{Binding Position.Column}" 
-                        Grid.RowSpan="{Binding Size.Height}" 
-                        Grid.ColumnSpan="{Binding Size.Width}"
-                        VerticalOptions="Start"
-                        HorizontalOptions="Start"
-                        xct:TouchEffect.Command="{Binding BindingContext.RunApplicationCommand, Source={x:Reference TilePageView}}"
-                        xct:TouchEffect.CommandParameter="{Binding .}"
-                        xct:TouchEffect.LongPressCommand="{Binding BindingContext.OpenContextMenuCommand, Source={x:Reference TilePageView}}"
-                        xct:TouchEffect.LongPressCommandParameter="{Binding .}"
-                        Scale="{Binding Scale}"
-                    >
-                    <components:StaticIcon Title="{Binding Title}" Icon="{Binding AppProperties.Icon}" VerticalOptions="Center" HorizontalOptions="Center"/>
-                </wplauncher:WideTile>
-            </DataTemplate>
-
-            <wplauncher:TileViewSelector x:Key="tileViewSelector" SquareTileTemplate="{StaticResource squareTileTemplate}" WideTileTemplate="{StaticResource wideTileTemplate}"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -65,7 +43,7 @@
               BackgroundColor="Green"
               xct:TouchEffect.Command="{Binding CancelRearrangeCommand}"
               BindableLayout.ItemsSource="{Binding TileModels}"
-              BindableLayout.ItemTemplateSelector="{StaticResource tileViewSelector}"
+              BindableLayout.ItemTemplate="{StaticResource squareTileTemplate}"
               HorizontalOptions="FillAndExpand"
               VerticalOptions="FillAndExpand">
 

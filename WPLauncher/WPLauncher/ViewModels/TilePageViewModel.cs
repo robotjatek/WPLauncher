@@ -149,7 +149,7 @@ namespace WPLauncher.ViewModels
         private void OnDropTile(DropEventArgs args)
         {
             var (column, row) = CalculateNewPosition(args);
-            if (column >= 0 && column < 3)
+            if (IsInBounds(args, column, row))
             {
                 _tileService.OnTileDrop(args, column, row);
             }
@@ -159,7 +159,7 @@ namespace WPLauncher.ViewModels
         private void OnDragTile(DropEventArgs args)
         {
             var (column, row) = CalculateNewPosition(args);
-            if (column >= 0 && column < 3)
+            if (IsInBounds(args, column, row))
             {
                 TilePageRef.ShowDropTarget(column, row, args.TileModel);
             }
@@ -185,6 +185,11 @@ namespace WPLauncher.ViewModels
             var calculatedRow = (int)Math.Round(args.TileModel.Position.Row + calculatedTranslationY);
 
             return (calculatedColumn, calculatedRow);
+        }
+
+        private static bool IsInBounds(DropEventArgs args, int column, int row)
+        {
+            return column >= 0 && column + args.TileModel.Size.Width <= 4 && row >= 0;
         }
 
         private void RefreshTiles()

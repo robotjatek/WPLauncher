@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="WPLauncher.SquareTile">
+             x:Class="WPLauncher.TileComponent">
   <ContentView.Content>
       <StackLayout>
-            <BoxView x:Name="MainSquareTile" BindingContext="{x:Reference MainSquareTile}" HeightRequest="{Binding Width}"/>
+            <BoxView x:Name="Tile" BindingContext="{x:Reference Tile}" HeightRequest="{Binding Width}"/>
         </StackLayout>
   </ContentView.Content>
 </ContentView>

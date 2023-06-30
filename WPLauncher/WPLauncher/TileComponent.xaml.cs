@@ -6,8 +6,6 @@ using WPLauncher.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-//TODO: move event behaviours from square tile and wide tile to a base class to prevent code duplication
-
 namespace WPLauncher
 {
     public class DropEventArgs
@@ -18,11 +16,11 @@ namespace WPLauncher
     }
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SquareTile : ContentView
+    public partial class TileComponent : ContentView
     {
-        public static readonly BindableProperty OnDropProperty = BindableProperty.Create(nameof(OnDrop), typeof(ICommand), typeof(SquareTile));
-        public static readonly BindableProperty OnDragProperty = BindableProperty.Create(nameof(OnDrag), typeof(ICommand), typeof(SquareTile));
-        public static readonly BindableProperty TileModelProperty = BindableProperty.Create(nameof(TileModel), typeof(TileModel), typeof(SquareTile));
+        public static readonly BindableProperty OnDropProperty = BindableProperty.Create(nameof(OnDrop), typeof(ICommand), typeof(TileComponent));
+        public static readonly BindableProperty OnDragProperty = BindableProperty.Create(nameof(OnDrag), typeof(ICommand), typeof(TileComponent));
+        public static readonly BindableProperty TileModelProperty = BindableProperty.Create(nameof(TileModel), typeof(TileModel), typeof(TileComponent));
 
         public ICommand OnDrop
         {
@@ -55,12 +53,12 @@ namespace WPLauncher
                 return GetValue(TileModelProperty) as TileModel;
             }
             set
-            {  
+            {
                 SetValue(TileModelProperty, value);
             }
         }
 
-        public SquareTile()
+        public TileComponent()
         {
             InitializeComponent();
             AddPanGestureRecognizer();
@@ -75,7 +73,7 @@ namespace WPLauncher
 
         private void Gr_PanUpdated(object sender, PanUpdatedEventArgs e)
         {
-            var tile = sender as SquareTile;
+            var tile = sender as TileComponent;
             if (TileModel.PanEnabled)
             {
 
@@ -86,9 +84,9 @@ namespace WPLauncher
 
                     OnDrag.Execute(new DropEventArgs
                     {
-                        TileModel = TileModel,
                         TranslationX = tile.TranslationX,
-                        TranslationY = tile.TranslationY
+                        TranslationY = tile.TranslationY,
+                        TileModel = TileModel
                     });
                 }
                 else if (e.StatusType == GestureStatus.Completed)
@@ -111,8 +109,9 @@ namespace WPLauncher
 
         protected override void OnSizeAllocated(double width, double height)
         {
-            base.OnSizeAllocated(width, width);
-            HeightRequest = width;
+            var aspectRatio = TileModel != null ? TileModel.Size.AspectRatio : 1;
+            base.OnSizeAllocated(width, width / aspectRatio);
+            HeightRequest = width / aspectRatio;
         }
     }
 }
