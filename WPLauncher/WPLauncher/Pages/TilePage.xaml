@@ -39,7 +39,7 @@
                     BackgroundColor="Black"
                     xct:TouchEffect.Command="{Binding CancelRearrangeCommand}">-->
         <Grid x:Name="tileGrid"
-              Padding="3"
+              Padding="5"
               BackgroundColor="Green"
               xct:TouchEffect.Command="{Binding CancelRearrangeCommand}"
               BindableLayout.ItemsSource="{Binding TileModels}"

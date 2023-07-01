@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -9,6 +10,13 @@ using WPLauncher.Services;
 using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 
+// TODO: Handle collision by rearranging the grid
+// TODO: Remove empty spaces between tiles (remove empty lines)
+// TODO: animate drop target
+// TODO: animate tile rearrange
+// TODO: restore carousel view
+// TODO: restore scroll view
+// Old WP7 UI demo: https://www.youtube.com/watch?v=RGaAiHihnyc
 namespace WPLauncher.ViewModels
 {
     public class TilePageViewModel : BaseViewModel
@@ -161,10 +169,19 @@ namespace WPLauncher.ViewModels
             var (column, row) = CalculateNewPosition(args);
             if (IsInBounds(args, column, row))
             {
+                // Check for collisions
+                var collisions = _tileService.CheckCollisionsForNewCoordinates(column, row, args.TileModel);
+                if (collisions.Any())
+                {
+                    Console.WriteLine($"Detected collisions! {collisions.Count()}");
+                }
+
+
                 TilePageRef.ShowDropTarget(column, row, args.TileModel);
             }
             else
             {
+                // Show old position for the droptarget if the new position is invalid
                 TilePageRef.ShowDropTarget(
                     args.TileModel.Position.Column,
                     args.TileModel.Position.Row,

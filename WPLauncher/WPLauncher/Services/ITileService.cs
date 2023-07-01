@@ -13,6 +13,7 @@ namespace WPLauncher.Services
         void UnpinTile(string packageName);
         List<TileModel> GetTiles();
         void OnTileDrop(DropEventArgs args, int newColumnPosition, int newRowPosition);
+        IEnumerable<TileModel> CheckCollisionsForNewCoordinates(int column, int row, TileModel tileModel);
 
         event TileListChangedEventHandler TileListChanged;
     }

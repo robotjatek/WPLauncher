@@ -77,5 +77,27 @@ namespace WPLauncher.Services
                 AppProperties = app,
             };
         }
+
+        public IEnumerable<TileModel> CheckCollisionsForNewCoordinates(int column, int row, TileModel tileModel)
+        {
+            // Note: tilemodel has the OLD coordinates here so only its reference and size values are relevant here
+            var res = new List<TileModel>();
+            var tilesWithoutSelf = _tiles.Where(tile => tile != tileModel);
+
+            foreach (var tile in tilesWithoutSelf)
+            {
+                var collisionX = tile.Position.Column < column + tileModel.Size.Width &&
+                    tile.Position.Column + tile.Size.Width > column;
+
+                var collisionY = tile.Position.Row < row + tileModel.Size.Height &&
+                    tile.Position.Row + tile.Size.Height > row;
+
+                if (collisionX && collisionY)
+                {
+                    res.Add(tile);
+                }
+            }
+            return res;
+        }
     }
 }
