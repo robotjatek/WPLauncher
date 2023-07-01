@@ -66,18 +66,6 @@ namespace WPLauncher.Services
             // Note this mustn't call the TileListChanged event as the list itself didn't change only the stored element
         }
 
-        private TileModel CreateTile(string title, TileSizeMode sizeMode, Position position, AppProperties app)
-        {
-            var size = this.tileSizeDefinitions.GetTileSize(sizeMode);
-            return new TileModel
-            {
-                Title = title,
-                Size = size,
-                Position = position,
-                AppProperties = app,
-            };
-        }
-
         public IEnumerable<TileModel> CheckCollisionsForNewCoordinates(int column, int row, TileModel tileModel)
         {
             // Note: tilemodel has the OLD coordinates here so only its reference and size values are relevant here
@@ -98,6 +86,18 @@ namespace WPLauncher.Services
                 }
             }
             return res;
+        }
+
+        private TileModel CreateTile(string title, TileSizeMode sizeMode, Position position, AppProperties app)
+        {
+            var size = this.tileSizeDefinitions.GetTileSize(sizeMode);
+            return new TileModel
+            {
+                Title = title,
+                Size = size,
+                Position = position,
+                AppProperties = app,
+            };
         }
     }
 }

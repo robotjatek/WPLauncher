@@ -1,5 +1,4 @@
-﻿
-using System.Linq;
+﻿using System.Linq;
 
 using WPLauncher.Models;
 using WPLauncher.ViewModels;
@@ -14,6 +13,7 @@ namespace WPLauncher
     {
         private readonly TilePageViewModel vm;
         private readonly BoxView _dropTarget;
+        private double _cellWidth;
 
         public TilePage(TilePageViewModel vm)
         {
@@ -30,16 +30,24 @@ namespace WPLauncher
 
         public void ShowDropTarget(int column, int row, TileModel tileModel)
         {
+            // Add droptarget to the grid
             this.tileGrid.Children.Add(
-                _dropTarget,
-                column,
-                column + tileModel.Size.Width, //col span
-                row,
-                row + tileModel.Size.Height); //row span
+            _dropTarget,
+            tileModel.Position.Column,
+            tileModel.Position.Column + tileModel.Size.Width, // col span
+            tileModel.Position.Row,
+            tileModel.Position.Row + tileModel.Size.Height); // row span
+
+            // Animate droptarget to the new position. TranslateTo is relative to the current gridPosition
+            _dropTarget.TranslateTo(
+                (column - tileModel.Position.Column) * _cellWidth,
+                (row - tileModel.Position.Row) * _cellWidth,
+                200);
         }
 
         public void HideDropTarget()
         {
+            _dropTarget.TranslateTo(0, 0);
             this.tileGrid.Children.Remove(_dropTarget);
         }
 
@@ -55,6 +63,7 @@ namespace WPLauncher
             // Onappearing has wrong sizedata at the first run so grid dimensions have to be recalculated when OnSizeAllocated fires
             base.OnSizeAllocated(width, height);
             vm.TilePageRef = this;
+            _cellWidth = this.Width / 4; // TODO: Columnsize can be configured in the future
             RecalculateGridDimensions();
         }
 
@@ -70,8 +79,7 @@ namespace WPLauncher
         {
             if (vm.TileModels.Any())
             {
-                var cellWidth = this.Width / 4; //TODO: Columnsize can be configured in the future
-                var heightWithLowestTile = vm.TileModels.DefaultIfEmpty(new TileModel()).Max(t => t.Position.Row + t.Size.Height) * cellWidth;
+                var heightWithLowestTile = vm.TileModels.DefaultIfEmpty(new TileModel()).Max(t => t.Position.Row + t.Size.Height) * _cellWidth;
 
                 //this.scroller.ForceLayout();
                 this.tileGrid.Layout(new Rectangle(0, 0, this.tileGrid.Width, heightWithLowestTile));

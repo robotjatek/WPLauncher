@@ -12,7 +12,6 @@ using Xamarin.Forms;
 
 // TODO: Handle collision by rearranging the grid
 // TODO: Remove empty spaces between tiles (remove empty lines)
-// TODO: animate drop target
 // TODO: animate tile rearrange
 // TODO: restore carousel view
 // TODO: restore scroll view
