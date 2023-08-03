@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -10,9 +9,10 @@ using WPLauncher.Services;
 using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 
-// TODO: Handle collision by rearranging the grid
 // TODO: Remove empty spaces between tiles (remove empty lines)
+// TODO: animate empty space removal
 // TODO: animate tile rearrange
+// TODO: restore enable/disable rearrange mode
 // TODO: restore carousel view
 // TODO: restore scroll view
 // Old WP7 UI demo: https://www.youtube.com/watch?v=RGaAiHihnyc
@@ -79,7 +79,7 @@ namespace WPLauncher.ViewModels
             OnDropCommand = new Command<DropEventArgs>(OnDropTile);
             OnDragCommand = new Command<DropEventArgs>(OnDragTile);
 
-            TileModels = new BindingList<TileModel>(_tileService.GetTiles());
+            TileModels = new BindingList<TileModel>(_tileService.Tiles);
             TileColor = _settingsService.AccentColor;
         }
 
@@ -168,14 +168,6 @@ namespace WPLauncher.ViewModels
             var (column, row) = CalculateNewPosition(args);
             if (IsInBounds(args, column, row))
             {
-                // Check for collisions
-                var collisions = _tileService.CheckCollisionsForNewCoordinates(column, row, args.TileModel);
-                if (collisions.Any())
-                {
-                    Console.WriteLine($"Detected collisions! {collisions.Count()}");
-                }
-
-
                 TilePageRef.ShowDropTarget(column, row, args.TileModel);
             }
             else
@@ -210,8 +202,7 @@ namespace WPLauncher.ViewModels
 
         private void RefreshTiles()
         {
-            var tiles = _tileService.GetTiles();
-            TileModels = new BindingList<TileModel>(tiles);
+            TileModels = new BindingList<TileModel>(_tileService.Tiles);
         }
     }
 }

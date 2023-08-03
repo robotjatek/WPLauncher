@@ -22,9 +22,11 @@ namespace WPLauncher
             this.BindingContext = vm;
             vm.PropertyChanged += Vm_PropertyChanged;
 
+            // TODO: replace this with a preview of the tile
             _dropTarget = new BoxView()
             {
-                BackgroundColor = Color.Red,
+                BackgroundColor = AccentColors.Cobalt,
+                Opacity = 0.7,
             };
         }
 
@@ -42,7 +44,7 @@ namespace WPLauncher
             _dropTarget.TranslateTo(
                 (column - tileModel.Position.Column) * _cellWidth,
                 (row - tileModel.Position.Row) * _cellWidth,
-                200);
+                100);
         }
 
         public void HideDropTarget()

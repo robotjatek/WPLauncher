@@ -113,6 +113,10 @@ Work is underway on M1 and some low hanging fruits from M2.
 
 
 
+### 2023/08/03
+
+- Handle collisions on tile movement
+
 ### 2023/07/01
 
 - Detect collisions
