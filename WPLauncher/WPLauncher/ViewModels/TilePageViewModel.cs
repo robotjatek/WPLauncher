@@ -9,7 +9,6 @@ using WPLauncher.Services;
 using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 
-// TODO: Remove empty spaces between tiles (remove empty lines)
 // TODO: animate empty space removal
 // TODO: animate tile rearrange
 // TODO: restore enable/disable rearrange mode

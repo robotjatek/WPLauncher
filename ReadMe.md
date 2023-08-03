@@ -48,6 +48,7 @@ M1 is all about laying the groundwork. Don't expect anything fancy here. At this
 - [x] Launch pinned apps
 - [x] Uninstall app
 - [x] Data structure to store tiles on the main screen
+- [ ] Rearrange tiles on the grid
 - [ ] Persist tile arrangement
 - [x] Global settings service with fixed options
 - [ ] Persist settings
@@ -66,7 +67,6 @@ M2 is the beginning to make the launcher usable in everyday usecases.
     - [ ] Messages
     - [ ] Photos
     - [ ] Contacts
-- [ ] Rearrange tiles on the grid
 - [ ] Resize tiles / Multi size app tiles
 - [ ] Feedback to the user when clicked (Rotation/animations/etc)
 - [x] Change accent color
@@ -116,6 +116,7 @@ Work is underway on M1 and some low hanging fruits from M2.
 ### 2023/08/03
 
 - Handle collisions on tile movement
+- Remove empty lines after moving tiles
 
 ### 2023/07/01
 

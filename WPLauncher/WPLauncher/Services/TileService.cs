@@ -59,13 +59,58 @@ namespace WPLauncher.Services
         public void OnTileDrop(DropEventArgs args, int newColumnPosition, int newRowPosition)
         {
             HandleTileCollisions(args, newColumnPosition, newRowPosition);
-
             args.TileModel.Position = new Position
             {
                 Row = newRowPosition,
                 Column = newColumnPosition
             };
+            RemoveEmptyLines();
             // Note this mustn't call the TileListChanged event as the list itself didn't change only the stored element
+        }
+
+        private void RemoveEmptyLines()
+        {
+            var fakeTile = new TileModel
+            {
+                Size = new TileSize(4, 1), // TODO: column size will be configurable in the future
+            };
+            
+            var lowestLine = Tiles.Max(tile => tile.Position.Row + tile.Size.Height);
+            var emptyLines = Enumerable.Range(0, lowestLine).Where(i => !CheckCollisionsForNewCoordinates(0, i, fakeTile).Any());
+            var ranges = CreateRanges(emptyLines.ToArray());
+            foreach (var (from, to, size) in ranges)
+            {
+                var tilesBelow = Tiles.Where(tile => tile.Position.Row >= to);
+                foreach (var tile in tilesBelow)
+                {
+                    tile.Position = new Position
+                    {
+                        Row = tile.Position.Row - size,
+                        Column = tile.Position.Column
+                    };
+                }
+            }
+        }
+
+        private IEnumerable<(int from, int to, int size)> CreateRanges(int[] numbers)
+        {
+            var ranges = new List<(int, int, int)>();
+            int rangeSize = 1;
+
+            for (int i = 1; i <= numbers.Length; i++)
+            {
+                if (i < numbers.Length && numbers[i] == numbers[i - 1] + 1)
+                {
+                    rangeSize++;
+                }
+                else
+                {
+                    ranges.Add((numbers[i - rangeSize], numbers[i - 1], rangeSize));
+                    rangeSize = 1;
+                }
+            }
+
+            return ranges;
         }
 
         private void HandleTileCollisions(DropEventArgs args, int newColumnPosition, int newRowPosition)
