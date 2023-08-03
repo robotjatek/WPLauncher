@@ -18,6 +18,7 @@ namespace WPLauncher
         public TilePage(TilePageViewModel vm)
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
             this.vm = vm;
             this.BindingContext = vm;
             vm.PropertyChanged += Vm_PropertyChanged;
@@ -28,6 +29,14 @@ namespace WPLauncher
                 BackgroundColor = AccentColors.Cobalt,
                 Opacity = 0.7,
             };
+        }
+
+        private async void SwipeGesture_Swiped(object sender, SwipedEventArgs e)
+        {
+            if(e.Direction == SwipeDirection.Left)
+            {
+                await Shell.Current.GoToAsync(nameof(AppListPage), true);
+            }
         }
 
         public void ShowDropTarget(int column, int row, TileModel tileModel)

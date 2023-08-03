@@ -4,6 +4,7 @@
              xmlns:wplauncher="clr-namespace:WPLauncher"
              xmlns:components="clr-namespace:WPLauncher.Components"
              xmlns:models="clr-namespace:WPLauncher.Models"
+             xmlns:viewmodels="clr-namespace:WPLauncher.ViewModels"
              x:Class="WPLauncher.TilePage"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Name="TilePageView">
@@ -19,8 +20,8 @@
                         Grid.ColumnSpan="{Binding Size.Width}"
                         VerticalOptions="Start"
                         HorizontalOptions="Start"
-                        xct:TouchEffect.Command="{Binding BindingContext.RunApplicationCommand, Source={x:Reference TilePageView}}"
-                        xct:TouchEffect.CommandParameter="{Binding .}"
+                        OnTap="{Binding BindingContext.RunApplicationCommand, Source={x:Reference TilePageView}}"
+                        OnTapCommandParameter="{Binding .}"
                         xct:TouchEffect.LongPressCommand="{Binding BindingContext.OpenContextMenuCommand, Source={x:Reference TilePageView}}"
                         xct:TouchEffect.LongPressCommandParameter="{Binding .}"
                         Scale="{Binding Scale}"
@@ -39,6 +40,7 @@
                     BackgroundColor="Black"
                     xct:TouchEffect.Command="{Binding CancelRearrangeCommand}">-->
         <Grid x:Name="tileGrid"
+              x:DataType="viewmodels:TilePageViewModel"
               Padding="5"
               BackgroundColor="Green"
               xct:TouchEffect.Command="{Binding CancelRearrangeCommand}"
@@ -46,6 +48,10 @@
               BindableLayout.ItemTemplate="{StaticResource squareTileTemplate}"
               HorizontalOptions="FillAndExpand"
               VerticalOptions="FillAndExpand">
+
+            <!--<Grid.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Left" Swiped="SwipeGesture_Swiped" />
+            </Grid.GestureRecognizers>-->
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

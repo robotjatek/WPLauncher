@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using WPLauncher.Models;
 using WPLauncher.Pages;
 
 using Xamarin.Forms;

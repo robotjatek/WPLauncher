@@ -29,7 +29,7 @@ namespace WPLauncher.Models
 
         public TileSize Size { get; set; }
 
-        public bool PanEnabled { get; set; } = true; // TODO: set it true only in drag mode
+        public bool PanEnabled { get; set; } = false;
 
         public Position Position 
         {

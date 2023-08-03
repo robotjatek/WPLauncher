@@ -9,11 +9,10 @@ using WPLauncher.Services;
 using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 
+// TODO: restore scroll view
+// TODO: restore carousel view
 // TODO: animate empty space removal
 // TODO: animate tile rearrange
-// TODO: restore enable/disable rearrange mode
-// TODO: restore carousel view
-// TODO: restore scroll view
 // Old WP7 UI demo: https://www.youtube.com/watch?v=RGaAiHihnyc
 namespace WPLauncher.ViewModels
 {
@@ -109,19 +108,19 @@ namespace WPLauncher.ViewModels
 
         private async Task OpenContextMenu(TileModel pressedTile)
         {
-            //if (SelectedTile == null)
-            //{
-            //    var action = (await Application.Current.MainPage.DisplayActionSheet("", "Cancel", null, new[] { "Unpin", "Rearrange" })).ToUpperInvariant();
-            //    switch (action)
-            //    {
-            //        case "UNPIN":
-            //            RemoveTile(pressedTile);
-            //            break;
-            //        case "REARRANGE":
-            //            SelectTileToRearrange(pressedTile);
-            //            break;
-            //    }
-            //}
+            if (SelectedTile == null)
+            {
+                var action = (await Application.Current.MainPage.DisplayActionSheet("", "Cancel", null, new[] { "Unpin", "Rearrange" })).ToUpperInvariant();
+                switch (action)
+                {
+                    case "UNPIN":
+                        RemoveTile(pressedTile);
+                        break;
+                    case "REARRANGE":
+                        SelectTileToRearrange(pressedTile);
+                        break;
+                }
+            }
         }
 
         private void SelectTileToRearrange(TileModel tile)
@@ -134,7 +133,8 @@ namespace WPLauncher.ViewModels
             {
                 CancelRearrangeMode();
                 SelectedTile = tile;
-                tile.Scale = 0.8;
+                tile.Scale = 0.9;
+                tile.PanEnabled = true;
             }
         }
 
@@ -143,6 +143,7 @@ namespace WPLauncher.ViewModels
             if (SelectedTile != null)
             {
                 SelectedTile.Scale = 1.0;
+                SelectedTile.PanEnabled = false;
             }
             SelectedTile = null;
         }

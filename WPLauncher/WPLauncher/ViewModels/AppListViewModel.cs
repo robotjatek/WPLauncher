@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-
+using WPLauncher.Models;
 using WPLauncher.Services;
 
 using Xamarin.CommunityToolkit.ObjectModel;

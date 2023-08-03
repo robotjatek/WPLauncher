@@ -21,6 +21,9 @@ namespace WPLauncher
         public static readonly BindableProperty OnDropProperty = BindableProperty.Create(nameof(OnDrop), typeof(ICommand), typeof(TileComponent));
         public static readonly BindableProperty OnDragProperty = BindableProperty.Create(nameof(OnDrag), typeof(ICommand), typeof(TileComponent));
         public static readonly BindableProperty TileModelProperty = BindableProperty.Create(nameof(TileModel), typeof(TileModel), typeof(TileComponent));
+        public static readonly BindableProperty OnTapProperty = BindableProperty.Create(nameof(OnTap), typeof(ICommand), typeof(TileComponent));
+        // TODO: this is a little redundant, because tilemodel is already here
+        public static readonly BindableProperty OnTapCommandParameterProperty = BindableProperty.Create(nameof(OnTapCommandParameter), typeof(TileModel), typeof (TileComponent));
 
         public ICommand OnDrop
         {
@@ -43,6 +46,30 @@ namespace WPLauncher
             set
             {
                 SetValue(OnDragProperty, value);
+            }
+        }
+
+        public ICommand OnTap
+        {
+            get
+            {
+                return GetValue(OnTapProperty) as ICommand;
+            }
+            set
+            {
+                SetValue(OnTapProperty, value);
+            }
+        }
+
+        public TileModel OnTapCommandParameter
+        {
+            get
+            {
+                return GetValue(OnTapCommandParameterProperty) as TileModel;
+            }
+            set
+            {
+                SetValue(OnTapCommandParameterProperty, value);
             }
         }
 
@@ -69,6 +96,15 @@ namespace WPLauncher
             var gr = new PanGestureRecognizer();
             gr.PanUpdated += Gr_PanUpdated;
             this.GestureRecognizers.Add(gr);
+
+            var tr = new TapGestureRecognizer();
+            tr.Tapped += Tr_Tapped;
+            this.GestureRecognizers.Add(tr);
+        }
+
+        private void Tr_Tapped(object sender, System.EventArgs e)
+        {
+            OnTap.Execute(OnTapCommandParameter);
         }
 
         private void Gr_PanUpdated(object sender, PanUpdatedEventArgs e)
