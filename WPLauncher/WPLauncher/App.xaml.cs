@@ -1,11 +1,13 @@
 ﻿
+using WPLauncher.Pages;
+
 using Xamarin.Forms;
 
 namespace WPLauncher
 {
     public partial class App : Application
     {
-        public App(TilePage startpage, AppListPage applist)
+        public App(StartPage startpage, AppListPage applist)
         {
             InitializeComponent();
 

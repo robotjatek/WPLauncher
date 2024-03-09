@@ -23,6 +23,7 @@ namespace WPLauncher.Services
             _tiles.Add(CreateTile("asd", TileSizeMode.Medium, new Position { Row = 1, Column = 2 }, null));
             _tiles.Add(CreateTile("Second", TileSizeMode.Medium, new Position { Row = 2, Column = 0 }, null));
             _tiles.Add(CreateTile("Third", TileSizeMode.Wide, new Position { Row = 6, Column = 0 }, null));
+            _tiles.Add(CreateTile("Fourth", TileSizeMode.Wide, new Position { Row = 8, Column = 0 }, null));
         }
 
         public void PinTile(AppProperties applicationProperties)

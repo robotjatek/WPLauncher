@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 using WPLauncher.Models;
 using WPLauncher.ViewModels;
@@ -29,14 +30,6 @@ namespace WPLauncher
                 BackgroundColor = AccentColors.Cobalt,
                 Opacity = 0.7,
             };
-        }
-
-        private async void SwipeGesture_Swiped(object sender, SwipedEventArgs e)
-        {
-            if(e.Direction == SwipeDirection.Left)
-            {
-                await Shell.Current.GoToAsync(nameof(AppListPage), true);
-            }
         }
 
         public void ShowDropTarget(int column, int row, TileModel tileModel)
