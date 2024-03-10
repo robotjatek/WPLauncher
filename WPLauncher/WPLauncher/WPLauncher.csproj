@@ -17,9 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.CommunityToolkit" Version="1.3.0" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.6" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.6" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,8 +32,8 @@
     <Compile Update="Pages\AppListPage.xaml.cs">
       <DependentUpon>AppListPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="SquareTile.xaml.cs">
-      <DependentUpon>SquareTile.xaml</DependentUpon>
+    <Compile Update="Components\TileComponent.xaml.cs">
+      <DependentUpon>TileComponent.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -44,13 +44,10 @@
     <EmbeddedResource Update="Pages\AccentColorListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="SquareTile.xaml">
+    <EmbeddedResource Update="Components\TileComponent.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\TilePage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="WideTile.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

@@ -7,9 +7,13 @@ namespace WPLauncher
 {
     public partial class App : Application
     {
-        public App(StartPage startpage)
+        public App(StartPage startpage, AppListPage applist)
         {
             InitializeComponent();
+
+            //Routing.RegisterRoute(nameof(startpage), typeof(TilePage));
+            //Routing.RegisterRoute(nameof(applist), typeof(AppListPage));
+            // TODO: MainPage needs to be new AppShell in MAUI
             MainPage = new NavigationPage(startpage);
         }
 

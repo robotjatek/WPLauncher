@@ -1,6 +1,6 @@
 # WPLauncher
 
-## Features
+## Planned features
 
 - WP7/8 style live tiles
 - App list
@@ -40,7 +40,6 @@ Widgets with live data
 
 M1 is all about laying the groundwork. Don't expect anything fancy here. At this phase the application is barely usable.
 
-- [ ] Static Grid
 - [x] 4 columns
 - [x] Show *something* on the tiles (text/image/icon/etc.)
 - [x] Handle click event on tiles
@@ -48,7 +47,8 @@ M1 is all about laying the groundwork. Don't expect anything fancy here. At this
 - [x] Unpin installed apps from the main screen
 - [x] Launch pinned apps
 - [x] Uninstall app
-- [ ] Data structure to store tiles on the main screen
+- [x] Data structure to store tiles on the main screen
+- [ ] Rearrange tiles on the grid
 - [ ] Persist tile arrangement
 - [x] Global settings service with fixed options
 - [ ] Persist settings
@@ -67,7 +67,6 @@ M2 is the beginning to make the launcher usable in everyday usecases.
     - [ ] Messages
     - [ ] Photos
     - [ ] Contacts
-- [ ] Rearrange tiles on the grid - (quadtree?)
 - [ ] Resize tiles / Multi size app tiles
 - [ ] Feedback to the user when clicked (Rotation/animations/etc)
 - [x] Change accent color
@@ -111,6 +110,35 @@ Work is underway on M1 and some low hanging fruits from M2.
 
 
 ## Development log
+
+
+
+### 2023/08/03
+
+- Handle collisions on tile movement
+- Remove empty lines after moving tiles
+
+### 2023/07/01
+
+- Detect collisions
+- Animate droptarget
+
+### 2023/06/30
+
+- Fixed a column size calculation bug on first run
+- Basic pan gesture recognition
+- Tiles can now be rearranged
+- Show drop target on screen
+
+### 2022/04/14
+
+- Fixed a bug when canceling tile rearrange mode did not work after a tileview resize event
+
+### 2022/04/07
+
+- Select tile to rearrange
+- Unselect tile when tapping on it the second time
+- Unselect tile when tapping on the background
 
 ### 2021/11/12
 

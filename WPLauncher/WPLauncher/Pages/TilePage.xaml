@@ -4,6 +4,7 @@
              xmlns:wplauncher="clr-namespace:WPLauncher"
              xmlns:components="clr-namespace:WPLauncher.Components"
              xmlns:models="clr-namespace:WPLauncher.Models"
+             xmlns:viewmodels="clr-namespace:WPLauncher.ViewModels"
              x:Class="WPLauncher.TilePage"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Name="TilePageView">
@@ -11,7 +12,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="squareTileTemplate" x:DataType="models:TileModel">
-                <wplauncher:SquareTile
+                <wplauncher:TileComponent
                         BackgroundColor="{Binding BindingContext.TileColor, Source={x:Reference TilePageView}}"
                         Grid.Row="{Binding Position.Row}"
                         Grid.Column="{Binding Position.Column}"
@@ -19,47 +20,46 @@
                         Grid.ColumnSpan="{Binding Size.Width}"
                         VerticalOptions="Start"
                         HorizontalOptions="Start"
-                        xct:TouchEffect.Command="{Binding BindingContext.RunApplicationCommand, Source={x:Reference TilePageView}}"
-                        xct:TouchEffect.CommandParameter="{Binding .}"
-                        xct:TouchEffect.LongPressCommand="{Binding BindingContext.OpenContextMenuCommand, Source={x:Reference TilePageView}}"
-                        xct:TouchEffect.LongPressCommandParameter="{Binding .}">
-
-                    <components:StaticIcon Title="{Binding Title}" Icon="{Binding AppProperties.Icon}" VerticalOptions="Center" HorizontalOptions="Center"/>
-                </wplauncher:SquareTile>
-            </DataTemplate>
-
-            <DataTemplate x:Key="wideTileTemplate" x:DataType="models:TileModel">
-                <wplauncher:WideTile
-                        BackgroundColor="{Binding BindingContext.TileColor, Source={x:Reference TilePageView}}"
-                        Grid.Row="{Binding Position.Row}" 
-                        Grid.Column="{Binding Position.Column}" 
-                        Grid.RowSpan="{Binding Size.Height}" 
-                        Grid.ColumnSpan="{Binding Size.Width}"
-                        VerticalOptions="Start"
-                        HorizontalOptions="Start"
-                        xct:TouchEffect.Command="{Binding BindingContext.RunApplicationCommand, Source={x:Reference TilePageView}}"
-                        xct:TouchEffect.CommandParameter="{Binding .}"
+                        OnTap="{Binding BindingContext.RunApplicationCommand, Source={x:Reference TilePageView}}"
+                        OnTapCommandParameter="{Binding .}"
                         xct:TouchEffect.LongPressCommand="{Binding BindingContext.OpenContextMenuCommand, Source={x:Reference TilePageView}}"
                         xct:TouchEffect.LongPressCommandParameter="{Binding .}"
-                    >
+                        Scale="{Binding Scale}"
+                        OnDrop="{Binding BindingContext.OnDropCommand, Source={x:Reference TilePageView}}"
+                        OnDrag="{Binding BindingContext.OnDragCommand, Source={x:Reference TilePageView}}"
+                        TileModel="{Binding .}">
                     <components:StaticIcon Title="{Binding Title}" Icon="{Binding AppProperties.Icon}" VerticalOptions="Center" HorizontalOptions="Center"/>
-                </wplauncher:WideTile>
+                </wplauncher:TileComponent>
             </DataTemplate>
 
-            <wplauncher:TileViewSelector x:Key="tileViewSelector" SquareTileTemplate="{StaticResource squareTileTemplate}" WideTileTemplate="{StaticResource wideTileTemplate}"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <ScrollView x:Name="scroller" BackgroundColor="Black">
-            <Grid x:Name="tileGrid" Padding="3" BindableLayout.ItemsSource="{Binding TileModels}" BindableLayout.ItemTemplateSelector="{StaticResource tileViewSelector}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-            </Grid>
-        </ScrollView>
+        <!--<ScrollView x:Name="scroller"
+                    BackgroundColor="Black"
+                    xct:TouchEffect.Command="{Binding CancelRearrangeCommand}">-->
+        <Grid x:Name="tileGrid"
+              x:DataType="viewmodels:TilePageViewModel"
+              Padding="5"
+              BackgroundColor="Green"
+              xct:TouchEffect.Command="{Binding CancelRearrangeCommand}"
+              BindableLayout.ItemsSource="{Binding TileModels}"
+              BindableLayout.ItemTemplate="{StaticResource squareTileTemplate}"
+              HorizontalOptions="FillAndExpand"
+              VerticalOptions="FillAndExpand">
+
+            <!--<Grid.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Left" Swiped="SwipeGesture_Swiped" />
+            </Grid.GestureRecognizers>-->
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <!--</ScrollView>-->
     </ContentPage.Content>
 </ContentPage>

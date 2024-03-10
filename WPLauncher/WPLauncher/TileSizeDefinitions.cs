@@ -51,6 +51,8 @@ namespace WPLauncher
                 Width = width;
                 Height = height;
             }
+
+            public int AspectRatio => Width / Height;
         }
     }
 }

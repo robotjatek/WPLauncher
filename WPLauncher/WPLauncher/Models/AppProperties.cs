@@ -1,7 +1,6 @@
-﻿
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
-namespace WPLauncher
+namespace WPLauncher.Models
 {
     public class AppProperties
     {
